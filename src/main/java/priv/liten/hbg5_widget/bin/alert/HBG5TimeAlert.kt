@@ -6,6 +6,7 @@ import priv.liten.hbg.R
 import priv.liten.hbg5_extension.hideKeyboard
 import priv.liten.hbg5_widget.bin.button.HBG5Button
 import priv.liten.hbg5_data.HBG5Time
+import priv.liten.hbg5_extension.focusHourCompat
 
 class HBG5TimeAlert: HBG5BaseAlert {
 
@@ -69,6 +70,7 @@ class HBG5TimeAlert: HBG5BaseAlert {
 
         timePicker.hour = dataRequest.time.hour
         timePicker.minute = dataRequest.time.minute
+        timePicker.focusHourCompat()
     }
 
     override fun v5Cancel() {

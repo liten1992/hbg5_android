@@ -21,33 +21,27 @@ class HBG5Date {
     constructor(timeInMillis: Long): this(calendar = timeInMillis.toCalendar())
     /**初始化失敗 將會套用系統當前日期*/ // todo hbg
     constructor(date: String) {
-        val dashDate = date.replace("/", "-")
-        if(dashDate.length < 8) {
+        val args = date
+            .replace("/", "")
+            .replace("-", "")
+            .replace("T", " ")
+            .split(" ")
+        val dashDate = args.firstOrNull()
+        if(dashDate == null) {
             build(calendar = Calendar.getInstance())
             return
         }
-        if(dashDate.length == 8) {
-            try {
-                val calendar = "yyyyMMdd".toCalendar(dashDate) ?: throw NullPointerException()
-                build(calendar = calendar)
-            }
-            catch (error: Throwable) {
-                build(calendar = Calendar.getInstance())
-            }
+        if(dashDate.length != 8) {
+            build(calendar = Calendar.getInstance())
             return
         }
-        if(dashDate.length >= 10 && dashDate[4] == '-' && dashDate[7] == '-') {
-            try {
-                val calendar = "yyyy-MM-dd".toCalendar(if(dashDate.length == 10) dashDate else dashDate.substring(0, 10)) ?: throw NullPointerException()
-                build(calendar = calendar)
-            }
-            catch (error: Throwable) {
-                build(calendar = Calendar.getInstance())
-            }
-            return
+        try {
+            val calendar = dashDate.toCalendar(format = "yyyyMMdd") ?: throw NullPointerException()
+            build(calendar = calendar)
         }
-
-        build(calendar = Calendar.getInstance())
+        catch (error: Throwable) {
+            build(calendar = Calendar.getInstance())
+        }
     }
 
     private fun build(calendar: Calendar) {

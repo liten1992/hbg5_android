@@ -1,7 +1,7 @@
 package priv.liten.hbg5_extension
 
-import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.res.Resources
 import android.content.res.TypedArray
 import android.graphics.Rect
 import android.graphics.drawable.BitmapDrawable
@@ -13,7 +13,10 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.DatePicker
+import android.widget.NumberPicker
 import android.widget.TextView
+import android.widget.TimePicker
 import androidx.annotation.ArrayRes
 import androidx.annotation.ColorRes
 import androidx.annotation.DimenRes
@@ -21,6 +24,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.biometric.BiometricManager
 import androidx.core.content.ContextCompat
+import androidx.core.view.postDelayed
 import priv.liten.hbg.R
 import priv.liten.hbg5_widget.drawable.HBG5ExifDrawable
 import priv.liten.hbg5_widget.impl.base.HBG5ViewImpl
@@ -163,3 +167,84 @@ fun TextView.insertText(index: Int? = null, text: CharSequence, showKeyboard: Bo
         this.showKeyboard()
     }
 }
+
+/**
+ * 在顯示後讓 TimePicker 的「小時」取得焦點（API 21~34），同時相容 Spinner 與 Clock 模式。
+ */
+fun TimePicker.focusHourCompat() {
+    // 確保時間元件已經佈局完畢再操作
+    post {
+        // 1) Spinner 模式：直接找到小時 NumberPicker
+        val hourId = Resources.getSystem().getIdentifier("hour", "id", "android")
+        val hourNp = findViewById<NumberPicker?>(hourId)
+        if (hourNp != null) {
+            // 讓 NumberPicker 可聚焦並請求焦點
+            hourNp.isFocusableInTouchMode = true
+            hourNp.requestFocus()
+            hourNp.performClick() // 有些機型需要 click 才會顯示游標/輸入
+            return@post
+        }
+
+        // 2) Clock 模式：嘗試點擊代表「小時」的 View（多數裝置的 id 是 "hours"）
+        val hoursViewId = Resources.getSystem().getIdentifier("hours", "id", "android")
+        val hoursView = findViewById<View?>(hoursViewId)
+        if (hoursView != null) {
+            hoursView.performClick() // 切到小時選取
+            hoursView.requestFocus()
+            return@post
+        }
+
+        // 3) 退路：反射呼叫 delegate.setCurrentItemShowing(0, true)
+        //    0 = 小時、1 = 分鐘（內部慣例，多數 ROM 適用）
+        try {
+            val delegateField = TimePicker::class.java.getDeclaredField("mDelegate").apply {
+                isAccessible = true
+            }
+            val delegate = delegateField.get(this)
+            val method = delegate.javaClass.getDeclaredMethod(
+                "setCurrentItemShowing",
+                Int::class.javaPrimitiveType,
+                Boolean::class.javaPrimitiveType
+            ).apply { isAccessible = true }
+            method.invoke(delegate, 0, true) // 0 = hour
+            // 盡量再要一下焦點，保險
+            requestFocus()
+        } catch (_: Throwable) {
+            // 最兇殘的 ROM 仍失敗就放過：至少不會崩潰
+        }
+    }
+}
+
+fun DatePicker.showDayPicker() {
+    postDelayed(1) {
+        val names = listOf(
+            "date_picker_header_date",  // AOSP
+            "android:id/date_picker_header_date", // AOSP
+            "date_picker_date",         // MIUI,
+            "miui:id/date_picker_date", // MIUI,
+            "hwext:id/date_picker_header_date",
+            "oppo:id/date_picker_header_date"
+        )
+
+        var resId = this.getTag(R.id.picker_date) as? Int
+        if(resId == null) {
+            for (name in names) {
+                val id = resources.getIdentifier(name, "id", context.packageName)
+                if (id != 0) {
+                    resId = id
+                    this.setTag(R.id.picker_date, id)
+                }
+            }
+            if(resId == null) {
+                resId = 0
+                this.setTag(R.id.picker_date, 0)
+            }
+        }
+        if(resId != 0) {
+            findViewById<View>(resId)?.performClick()
+        }
+        return@postDelayed
+    }
+}
+
+fun DatePicker.showYearPicker() { }

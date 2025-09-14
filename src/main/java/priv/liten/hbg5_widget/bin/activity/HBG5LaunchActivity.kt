@@ -19,26 +19,23 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import priv.liten.base_extension.readFileType
 import priv.liten.hbg.BuildConfig
 import priv.liten.hbg5_extension.BitmapBuilder
-import priv.liten.hbg5_extension.copyFile
+import priv.liten.hbg5_extension.contains
 import priv.liten.hbg5_extension.copyFileToDownload
 import priv.liten.hbg5_extension.copyFileToPrivate
 import priv.liten.hbg5_extension.fileType
 import priv.liten.hbg5_extension.getDownloadUri
 import priv.liten.hbg5_extension.getFileSizeMb
 import priv.liten.hbg5_extension.getPrivateUri
-import priv.liten.hbg5_extension.pathExtension
 import priv.liten.hbg5_extension.save
 import priv.liten.hbg5_http.HBG5DownloadCall
 import priv.liten.hbg5_widget.application.HBG5Application
+import priv.liten.hbg5_widget.application.buildFileName
 import priv.liten.hbg5_widget.bin.alert.HBG5BaseAlert
 import priv.liten.hbg5_widget.bin.fragment.HBG5Fragment
 import priv.liten.hbg5_widget.config.HBG5WidgetConfig
 import priv.liten.hbg5_widget.impl.activity.HBG5LaunchActivityImpl
-import java.io.BufferedReader
-import java.io.InputStreamReader
 import java.lang.NullPointerException
 
 open class HBG5LaunchActivity : AppCompatActivity(), HBG5LaunchActivityImpl {
@@ -423,29 +420,16 @@ open class HBG5LaunchActivity : AppCompatActivity(), HBG5LaunchActivityImpl {
         canOverwrite: Boolean
     ) {
         // 路徑為空值 直接返回
-        if(uriResponse?.uriList?.isEmpty() ?: true) {
+        if((uriResponse?.uriList ?: emptyList()).isEmpty()) {
             onResult(HBG5Fragment.Result.CANCELED, HBG5Fragment.UriResponse().also { data ->
                 data.error = uriResponse?.error
             })
-            return
-        }
-
-        val app = HBG5Application.instance
-        if(app == null) {
-            onResult(HBG5Fragment.Result.CANCELED, HBG5Fragment.UriResponse(error = "Not found application"))
             return
         }
         if(uriResponse == null) {
             onResult(HBG5Fragment.Result.CANCELED, HBG5Fragment.UriResponse(error = "${result.text} data null"))
             return
         }
-
-        val dir = app.buildDirUriString() ?: ""
-        if(dir.isEmpty()) {
-            onResult(HBG5Fragment.Result.CANCELED, HBG5Fragment.UriResponse(error = "Build cache dir failed"))
-            return
-        }
-
         val errorMessage = mutableListOf<String>()
         // 返回結果
         uriResponse.uriList = uriResponse.uriList
@@ -460,9 +444,10 @@ open class HBG5LaunchActivity : AppCompatActivity(), HBG5LaunchActivityImpl {
                 if(canOverwrite) {
                     return@map uri
                 }
-
-                val rename = app.buildFileName(fileType = ".${uri.fileType}")
-                val newUri = uri.copyFile(dir = dir, rename = rename)
+                val newUri = uri.copyFileToPrivate(
+                    dirName = HBG5WidgetConfig.PRIVATE_DIR_DOWNLOAD,
+                    fileName = buildFileName(fileType = ".${uri.fileType}")
+                )
                 if(newUri == null) {
                     errorMessage.add("Copy file to dir failed")
                     return@map null
@@ -497,29 +482,16 @@ open class HBG5LaunchActivity : AppCompatActivity(), HBG5LaunchActivityImpl {
         canOverwrite: Boolean
     ) {
         // 路徑為空值 直接返回
-        if(uriResponse?.uriList?.isEmpty() ?: true) {
+        if((uriResponse?.uriList ?: emptyList()).isEmpty()) {
             onResult(HBG5Fragment.Result.CANCELED, HBG5Fragment.UriResponse().also { data ->
                 data.error = uriResponse?.error
             })
-            return
-        }
-
-        val app = HBG5Application.instance
-        if(app == null) {
-            onResult(HBG5Fragment.Result.CANCELED, HBG5Fragment.UriResponse(error = "Not found application"))
             return
         }
         if(uriResponse == null) {
             onResult(HBG5Fragment.Result.CANCELED, HBG5Fragment.UriResponse(error = "${result.text} data null"))
             return
         }
-
-        val dir = app.buildDirUriString() ?: ""
-        if(dir.isEmpty()) {
-            onResult(HBG5Fragment.Result.CANCELED, HBG5Fragment.UriResponse(error = "Build cache dir failed"))
-            return
-        }
-
         val errorMessage = mutableListOf<String>()
         // 返回結果
         uriResponse.uriList = uriResponse.uriList
@@ -533,28 +505,24 @@ open class HBG5LaunchActivity : AppCompatActivity(), HBG5LaunchActivityImpl {
                     return@map null
                 }
                 // 需要重製
-                var needReset = false
-                if(request.noTypeHeic && BitmapBuilder.BitmapConfig.Format.HEIC == bitmapConfig.format) {
-                    needReset = true
-                }
+                val redraw =
+                    // 禁止 HEIC 格式
+                    if(request.noTypeHeic && BitmapBuilder.BitmapConfig.Format.HEIC == bitmapConfig.format) true
+                    // 圖像尺寸超出限制
+                    else listOf(bitmapConfig.width, bitmapConfig.height).contains { it > request.quality.max }
                 // 不需要影像壓縮或重建 複製存檔
-                if(!needReset
-                    && bitmapConfig.width <= request.quality.max
-                    && bitmapConfig.height <= request.quality.max) {
+                if(!redraw) {
                     // 允許原址複寫 代表保持原樣
                     if(canOverwrite) {
                         return@map uri
                     }
-
-                    val rename = app.buildFileName(fileType = ".${bitmapConfig.format!!.type}")
-                    if(rename.isEmpty()) {
-                        errorMessage.add("Build image file name failed")
-                        return@map null
-                    }
-
-                    val newUri = uri.copyFile(dir = dir, rename = rename)
+                    // 建立備份檔案路徑
+                    val newUri = uri.copyFileToPrivate(
+                        dirName = HBG5WidgetConfig.PRIVATE_DIR_DOWNLOAD,
+                        fileName = buildFileName(fileType = ".${bitmapConfig.format!!.type}")
+                    )
                     if(newUri == null) {
-                        errorMessage.add("Copy image file failed")
+                        errorMessage.add("Copy image file uri null")
                         return@map null
                     }
 
@@ -562,31 +530,30 @@ open class HBG5LaunchActivity : AppCompatActivity(), HBG5LaunchActivityImpl {
                 }
                 // 需要影像壓縮或重建
                 else {
-                    var newUri: Uri? = uri
-                    if(!canOverwrite) {
-                        val newUriStr = app.buildFileUriString(fileType = ".png") ?: ""
-                        if(newUriStr.isEmpty()) {
-                            errorMessage.add("Build new image path failed")
-                            return@map null
-                        }
-                        newUri = Uri.parse(newUriStr)
-                    }
+                    // 重建後的檔案規格為 jpg 原圖如果為 jpg 且允許覆蓋則使用原始路徑即可
+                    val newUri =
+                        if(bitmapConfig.format == BitmapBuilder.BitmapConfig.Format.JPG && canOverwrite) uri
+                        else getPrivateUri(
+                            dirName = HBG5WidgetConfig.PRIVATE_DIR_DOWNLOAD,
+                            fileName = buildFileName(fileType = ".jpg")
+                        )
                     if(newUri == null) {
-                        errorMessage.add("Build new image path failed")
+                        errorMessage.add("Redraw image file uri null")
                         return@map null
                     }
-
+                    // 重繪圖像
                     val bitmap = BitmapBuilder.build(
                         uri = uri,
                         bmpConfig = bitmapConfig,
                         maxSize = request.quality.max
                     )
+                    // 繪製失敗
                     if(bitmap == null) {
                         errorMessage.add("Build new image failed")
                         return@map null
                     }
-
-                    if(!bitmap.save(fileUri = newUri.toString(), isPng = true)) {
+                    // 繪製成功 儲存
+                    if(!bitmap.save(fileUri = newUri, isPng = false)) {
                         errorMessage.add("Save new image failed")
                         return@map null
                     }
@@ -783,7 +750,11 @@ open class HBG5LaunchActivity : AppCompatActivity(), HBG5LaunchActivityImpl {
                     onResult(HBG5Fragment.Result.CANCELED, HBG5Fragment.UriResponse(error = error))
                     return@v5askPermission
                 }
-                val outUri = HBG5Fragment.URI_GET_CAMERA_IMAGE
+                // todo hbg5
+                val outUri = getPrivateUri(
+                    dirName = HBG5WidgetConfig.PRIVATE_DIR_DOWNLOAD,
+                    fileName = buildFileName(fileType = ".jpg")
+                )
                 if(outUri == null) {
                     onResult(HBG5Fragment.Result.CANCELED, HBG5Fragment.UriResponse(error = "URI_GET_CAMERA_IMAGE null"))
                     return@v5askPermission
@@ -853,7 +824,10 @@ open class HBG5LaunchActivity : AppCompatActivity(), HBG5LaunchActivityImpl {
                     onResult(HBG5Fragment.Result.CANCELED, HBG5Fragment.UriResponse(error = error))
                     return@v5askPermission
                 }
-                val outUri = HBG5Fragment.URI_GET_CAMERA_VIDEO
+                val outUri = getPrivateUri(
+                    dirName = HBG5WidgetConfig.PRIVATE_DIR_DOWNLOAD,
+                    fileName = buildFileName(fileType = ".mp4")
+                )
                 if(outUri == null) {
                     onResult(HBG5Fragment.Result.CANCELED, HBG5Fragment.UriResponse(error = "URI_GET_CAMERA_VIDEO null"))
                     return@v5askPermission
@@ -991,6 +965,57 @@ open class HBG5LaunchActivity : AppCompatActivity(), HBG5LaunchActivityImpl {
                     )
                 }
                 selectFile(fileType = HBG5Fragment.FileType.SQLITE.mime)
+            }
+        )
+    }
+
+    /**取得壓縮檔*/ // todo hbg
+    fun v5SelectZip(
+        onResult: (HBG5Fragment.Result, HBG5Fragment.UriResponse) -> Unit
+    ) {
+        v5askPermission(
+            permissionList = Permission.FILE_R.values(),
+            onResult = { granted, error ->
+                if(!granted) {
+                    onResult(HBG5Fragment.Result.CANCELED, HBG5Fragment.UriResponse(error = error))
+                    return@v5askPermission
+                }
+                onFragmentResultListener = { result, data ->
+                    val uriResponse = data as? HBG5Fragment.UriResponse
+                    onSelectFileResult(
+                        request = HBG5WidgetConfig.Request.SelectFile().also { request ->
+                            request.maxMb = null
+                        },
+                        onResult = { result, uriResponse ->
+                            // 自行檢測 db 格式
+                            val uri = uriResponse.uriList.firstOrNull()
+                            if(uri == null) {
+                                onResult(
+                                    HBG5Fragment.Result.CANCELED,
+                                    HBG5Fragment.UriResponse(error = "查無檔案路徑")
+                                )
+                                return@onSelectFileResult
+                            }
+                            val zipType = HBG5DownloadCall.FILE_TYPE_HEADER_ZIP.first.replace(".", "")
+                            val uriType = uri.fileType(mapOf(HBG5DownloadCall.FILE_TYPE_HEADER_ZIP))
+                            if(uriType != zipType) {
+                                onResult(
+                                    HBG5Fragment.Result.CANCELED,
+                                    HBG5Fragment.UriResponse(error = "所選檔案非壓縮檔案格式")
+                                )
+                                return@onSelectFileResult
+                            }
+                            onResult(
+                                HBG5Fragment.Result.OK,
+                                HBG5Fragment.UriResponse(data = uri)
+                            )
+                        },
+                        result = result,
+                        uriResponse = uriResponse,
+                        canOverwrite = true
+                    )
+                }
+                selectFile(fileType = HBG5Fragment.FileType.ZIP.mime)
             }
         )
     }

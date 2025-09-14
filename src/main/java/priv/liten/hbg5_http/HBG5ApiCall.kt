@@ -157,10 +157,10 @@ open class HBG5ApiCall<TData: HBG5ApiData<*, *>>: HBG5BaseCall {
 
             // 呼叫實體邏輯建立
             action = service.value?.call(
-                url,
-                headers,
-                method,
-                requestBody
+                url = url,
+                headers = headers,
+                urlMethod = method,
+                body = requestBody
             )
 
             val exeResponse = action?.execute() ?: throw NullPointerException("Execute response is null")

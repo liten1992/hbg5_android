@@ -149,13 +149,25 @@ fun String.toColor(): Int {
     return Color.parseColor(this)
 }
 
-fun String.toCalendar(format: String, local: Locale = Locale.ENGLISH): Calendar? {
+fun String.toCalendar(
+    format: String,
+    timeZone: Int? = null,
+    local: Locale = Locale.getDefault()): Calendar? {
     try {
         val sdf = SimpleDateFormat(format, local)
+        val zone: TimeZone? = when {
+            timeZone == null -> null
+            else -> TimeZone.getTimeZone("GMT%+03d".format(timeZone))
+        }
 
+        if(zone != null) {
+            sdf.timeZone = zone
+        }
         val date = sdf.parse(this) ?: return null
 
-        val calendar = Calendar.getInstance(Locale.getDefault())
+        val calendar =
+            if(zone == null) Calendar.getInstance(local)
+            else Calendar.getInstance(zone, local)
 
         calendar.timeInMillis = date.time
 
@@ -163,61 +175,129 @@ fun String.toCalendar(format: String, local: Locale = Locale.ENGLISH): Calendar?
     }
     catch (error: Exception) { return null }
 }
-// todo hbg
-/**yyyy-MM-ddTHH:mm:ss.SSSZ*/
-fun String.toFullIso8601(): String? {
-    var date = ""
-    var time = "00:00:00:000"
-
-    val dateTime = this
+/**
+ * 預設 日期 1900-01-01 時間 00:00:00.000 如果輸入的日期時間格式中未表明 時區偏移 則使用 裝置預設時區
+ * @param outUtc 協助轉換 UTC 偏移量 如不填寫 則以當前設備的偏移量為主
+ * @param defInUtc 當文字格式沒有顯示 UTC 偏移量時預設的偏移量 null: 使用設備預設偏移量
+ * @return null: 轉換失敗, yyyy-MM-ddTHH:mm:ss.SSS+-HH:mm(UTC)
+ * */
+fun String.toIso8601(outUtc: Int? = null, defInUtc: Int? = null): String? {
+    var date = "1900-01-01"
+    var time = "00:00:00"
+    var inUtc = defInUtc ?: (Calendar.getInstance().timeZone.rawOffset / 3600000)
+    // 將時間日期正規化 2020/01/01 23:59:59.999Z -> 2020-01-01T23:59:59:999Z
+    var dateTime = this
+        .uppercase()
         .replace("/", "-")
         .replace(" ", "T")
-        .replace("Z", "")
         .replace(".", ":")
+    // utc 計算 只有在包含時間時 時區偏移才有作用
+    if(dateTime.contains("T")) {
+        val timeIndex = dateTime.indexOf("T")
+        var foundIndex = -1
+        // "Z"
+        if(foundIndex == -1) {
+            foundIndex = dateTime.lastIndexOf("Z")
+            if(foundIndex != -1 && timeIndex < foundIndex) {
+                inUtc = 0
+            }
+        }
+        // "+"
+        if(foundIndex == -1) {
+            foundIndex = dateTime.lastIndexOf("+")
+            if(foundIndex != -1 && timeIndex < foundIndex) {
+                val args = dateTime.substring(foundIndex + 1, dateTime.length).split(":")
+                inUtc = args[0].toIntOrNull() ?: inUtc
+            }
+        }
+        // "-"
+        if(foundIndex == -1) {
+            foundIndex = dateTime.lastIndexOf("-")
+            if(foundIndex != -1 && timeIndex < foundIndex) {
+                val args = dateTime.substring(foundIndex + 1, dateTime.length).split(":")
+                inUtc = args[0].toIntOrNull()?.let { -it } ?: inUtc
+            }
+        }
+        // 移除 UTC 字串資訊
+        if(foundIndex != -1 && timeIndex < foundIndex) {
+            dateTime = dateTime.substring(0, foundIndex)
+        }
+    }
 
-    val timeIndex = dateTime.indexOf("T")
-    if(timeIndex != -1) {
-        date = dateTime.substring(0, timeIndex)
-        if(timeIndex + 1 < dateTime.length) {
-            time = dateTime
-                .substring(timeIndex + 1, dateTime.length)
-                .replace(".", ":")
-        }
+    // 文字包含時間資訊
+    if(dateTime.contains("T")) {
+        val args = dateTime.split("T")
+        // 更新日期資訊
+        date = args[0]
+        // 更新時間資訊
+        time = args[1]
     }
-    else {
-        if(dateTime.contains("-")) {
-            date = dateTime
-        }
-        else if(dateTime.contains(":")) {
-            time = dateTime
-        }
+    // 文字僅日期資訊
+    else if(dateTime.contains("-")) {
+        date = dateTime
     }
+    // 文字僅時間資訊
+    else if(dateTime.contains(":")) {
+        time = dateTime
+    }
+
     if(date.isEmpty() || time.isEmpty()) { return null }
 
-    val dateList = mutableListOf(1900, 1, 1)
-    val timeList = mutableListOf(0, 0, 0, 0)
+    var year = 1900
+    var month = 1
+    var day = 1
+    var hour = 0
+    var minute = 0
+    var second = 0
+    var millis = 0
 
     for((index, value) in date.split("-").withIndex()) {
-        if(index >= dateList.size) { return null }
-        val intValue = value.toIntOrNull() ?: return null
-        dateList[index] = intValue
+        when(index) {
+            0 -> {
+                year = value.toIntOrNull() ?: year
+            }
+            1 -> {
+                month = value.toIntOrNull() ?: month
+            }
+            2 -> {
+                day = value.toIntOrNull() ?: day
+            }
+        }
     }
     for((index, value) in time.split(":").withIndex()) {
-        if(index >= timeList.size) { return null }
-        val intValue = value.toIntOrNull() ?: return null
-        timeList[index] = intValue
+        when(index) {
+            0 -> {
+                hour = value.toIntOrNull() ?: hour
+            }
+            1 -> {
+                minute = value.toIntOrNull() ?: minute
+            }
+            2 -> {
+                second = value.toIntOrNull() ?: second
+            }
+            3 -> {
+                millis = value.toIntOrNull() ?: millis
+            }
+        }
     }
 
-    return "%04d-%02d-%02dT%02d:%02d:%02d.%03dZ".format(
-        dateList[0],
-        dateList[1],
-        dateList[2],
-        timeList[0],
-        timeList[1],
-        timeList[2],
-        timeList[3]
+    val outCalendar = Calendar.getInstance(
+        TimeZone.getTimeZone("GMT%+03d".format(inUtc))
+    )
+    outCalendar.set(year, month - 1, day, hour, minute, second)
+    outCalendar.set(Calendar.MILLISECOND, millis)
+
+    return outCalendar.toString(
+        format = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX",
+        utc = outUtc
     )
 }
+// todo hbg
+/**
+ * @param defInUtc 當文字格式沒有顯示 UTC 偏移量時預設的偏移量 null: 使用設備預設偏移量
+ * */
+fun String.toIso8601Calendar(defInUtc: Int? = null): Calendar? = toIso8601(defInUtc = defInUtc)?.toCalendar(format = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
+// todo hbg
 
 fun String.toCsvFields(): List<String> {
 

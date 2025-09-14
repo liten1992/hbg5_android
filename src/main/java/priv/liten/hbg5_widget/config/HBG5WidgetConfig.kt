@@ -4,10 +4,12 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.net.Uri
+import android.os.Environment
 import android.text.InputType
 import android.view.Gravity
 import android.view.View
 import android.widget.ImageView
+import androidx.core.net.toFile
 import androidx.recyclerview.widget.RecyclerView
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache
 import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator
@@ -18,6 +20,8 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration
 import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader
 import priv.liten.hbg5_extension.BitmapBuilder
+import priv.liten.hbg5_extension.getPrivatePath
+import priv.liten.hbg5_extension.getPrivateUri
 import java.io.File
 import java.io.IOException
 import java.lang.ref.WeakReference
@@ -31,6 +35,11 @@ import javax.net.ssl.*
 class HBG5WidgetConfig {
 
     companion object {
+        const val PRIVATE_DIR_DOWNLOAD = "Download"
+        const val PRIVATE_DIR_CACHE = "Cache"
+        const val PRIVATE_DIR_CACHE_IMAGES = "Cache/Images"
+        const val PRIVATE_DIR_DOCUMENTS = "Documents"
+
         /** 略過SSL憑證檢查 直接下載圖片 */const
         val SSL_UNSAFE_ENABLE = true
         /** 顯示下載圖片的設定 */
@@ -121,9 +130,9 @@ class HBG5WidgetConfig {
                     .imageDownloader(downloader)
                     //.imageDownloader(BaseImageDownloader(context,5 * 1000, 30 * 1000))  // connectTimeout (5 s), readTimeout (20 s)
                     .defaultDisplayImageOptions(IMAGE_OPTIONS_BUILDER.build())
-                var cacheDir = context.externalCacheDir
+
+                val cacheDir = context.getPrivatePath(dirName = PRIVATE_DIR_CACHE_IMAGES)?.let { path -> File(path) }
                 if (cacheDir != null) {
-                    cacheDir = File(cacheDir.absolutePath + File.separator + "ImageCache")
                     configBuilder.diskCache(UnlimitedDiskCache(cacheDir)) // You can pass your own disc cache implementation
                 }
                 instance.init(configBuilder.build())

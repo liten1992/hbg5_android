@@ -72,7 +72,7 @@ fun Bitmap.save(fileUri: String, isPng: Boolean = true): Boolean {
                 this.compress(Bitmap.CompressFormat.PNG, 100, stream)
             }
             else {
-                this.compress(Bitmap.CompressFormat.JPEG, 90, stream)
+                this.compress(Bitmap.CompressFormat.JPEG, 95, stream)
             }
             return true
         }
@@ -81,6 +81,10 @@ fun Bitmap.save(fileUri: String, isPng: Boolean = true): Boolean {
         return false
     }
 }
+/**圖片儲存為本機檔案
+ * @param fileUri ex:content://xxx.jpg
+ * */
+fun Bitmap.save(fileUri: Uri, isPng: Boolean = true): Boolean = save(fileUri = fileUri.toString(), isPng = isPng)
 
 class BitmapBuilder {
     class BitmapConfig {

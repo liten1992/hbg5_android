@@ -97,4 +97,13 @@ class HBG5Time {
         this.minute = minute
         this.second = second
     }
+
+    fun toCalendar(): Calendar {
+        return Calendar.getInstance().also { calendar ->
+            calendar.set(Calendar.HOUR_OF_DAY, this.hour)
+            calendar.set(Calendar.MINUTE, this.minute)
+            calendar.set(Calendar.SECOND, this.second)
+            calendar.set(Calendar.MILLISECOND, 0)
+        }
+    }
 }

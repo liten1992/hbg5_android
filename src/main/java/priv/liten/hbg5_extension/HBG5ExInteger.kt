@@ -35,7 +35,7 @@ fun Int.toYMDArray(): IntArray {
 fun Int.toHMSArray(): IntArray {
     return intArrayOf(this / 10000, this / 100 % 100, this % 100)
 }
-// todo nhf
+
 fun <T> Int.getOrNull(list: List<T>?): T? {
     return list?.getOrNull(this)
 }

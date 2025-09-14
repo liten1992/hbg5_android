@@ -18,6 +18,9 @@ import androidx.biometric.BiometricPrompt
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import priv.liten.hbg.BuildConfig
 import priv.liten.hbg.R
 import priv.liten.hbg5_data.HBG5Data
@@ -49,35 +52,35 @@ open class HBG5Fragment: HBG5FrameLayout, HBG5FragmentImpl, LifecycleOwner {
         private val ALERT_CACHE: MutableMap<String, MutableList<HBG5BaseAlert>> = HashMap()
         /** 生物辨識等待彈窗 */
         private var BIOMETRIC_ALERT: MutableMap<Int, BiometricPrompt> = mutableMapOf()
-        /** 隨機檔案名稱 */
-        val URI_GET_RANDOM_NAME: String
-            get() {
-                val randCode = mutableListOf<Char>()
-                for(index in 0 until 4) {
-                    randCode.add('a' + (0 until 26).random())
-                }
-                return "${Calendar.getInstance().toString(format = "yyyyMMddHHmmss")}${randCode.toLinkString(linkText = "")}"
-            }
-        /** 從相機取得照片時的臨時相片儲存位置 */
-        val URI_GET_CAMERA_IMAGE: Uri?
-            get() {
-                val context = HBG5Application.instance ?: return null
-
-                return File(
-                    context.externalCacheDir,
-                    "${URI_GET_RANDOM_NAME}_camera.jpg")
-                    .toUri(context = context)
-            }
-        /** 從相機取得照片時的臨時影片儲存位置 */
-        val URI_GET_CAMERA_VIDEO: Uri?
-            get() {
-                val context = HBG5Application.instance ?: return null
-
-                return File(
-                    context.externalCacheDir,
-                    "${URI_GET_RANDOM_NAME}_camera.mp4")
-                    .toUri(context = context)
-            }
+        // todo hbg delete /** 隨機檔案名稱 */
+//        val URI_GET_RANDOM_NAME: String
+//            get() {
+//                val randCode = mutableListOf<Char>()
+//                for(index in 0 until 4) {
+//                    randCode.add('a' + (0 until 26).random())
+//                }
+//                return "${Calendar.getInstance().toString(format = "yyyyMMddHHmmss")}${randCode.toLinkString(linkText = "")}"
+//            }
+        // todo hbg delete /** 從相機取得照片時的臨時相片儲存位置 */
+//        val URI_GET_CAMERA_IMAGE: Uri?
+//            get() {
+//                val context = HBG5Application.instance ?: return null
+//
+//                return File(
+//                    context.externalCacheDir,
+//                    "${URI_GET_RANDOM_NAME}_camera.jpg")
+//                    .toUri(context = context)
+//            }
+        // todo hbg delete /** 從相機取得照片時的臨時影片儲存位置 */
+//        val URI_GET_CAMERA_VIDEO: Uri?
+//            get() {
+//                val context = HBG5Application.instance ?: return null
+//
+//                return File(
+//                    context.externalCacheDir,
+//                    "${URI_GET_RANDOM_NAME}_camera.mp4")
+//                    .toUri(context = context)
+//            }
 
         /** 自動隱藏全螢幕的子頁面(性能優化 但會有閃爍問題) */
         val AUTO_HIDE_FULL_SCREEN = false
@@ -788,7 +791,6 @@ open class HBG5Fragment: HBG5FrameLayout, HBG5FragmentImpl, LifecycleOwner {
     override fun v5AskPermission(
         permissionList: Array<String>,
         onResult: ((Boolean, String?) -> Unit)?) {
-
         val activity = context as? HBG5LaunchActivity
         if(activity != null) {
             activity.v5askPermission(
@@ -1376,7 +1378,14 @@ open class HBG5Fragment: HBG5FrameLayout, HBG5FragmentImpl, LifecycleOwner {
     fun v5SelectZip(
         onResult: ((HBG5Fragment.Result, HBG5Fragment.UriResponse) -> Unit)
     ) {
-
+        val activity = context as? HBG5LaunchActivity
+        if(activity == null) {
+            onResult(Result.CANCELED, UriResponse(error = "Activity is null"))
+            return
+        }
+        activity.v5SelectZip(
+            onResult = onResult
+        )
     }
     /**查詢CSV檔案*/ // todo hbg
     fun v5SelectCsv(

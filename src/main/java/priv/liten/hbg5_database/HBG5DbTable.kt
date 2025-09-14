@@ -47,7 +47,7 @@ open class HBG5DbTable {
             .isNotEmpty()
     }
     /** 新增欄位 */
-    fun addField(database: HBG5Database, fName: String, fType: HBG5DbConfig.FieldType) : Boolean {
+    fun addField(database: HBG5Database, fName: String, fType: HBG5DbConfig.FieldType, fDefault: String = "") : Boolean {
         // 如果欄位存在忽略操作
         if(hasField(database = database, fName = fName)) {
             if(BuildConfig.DEBUG) {
@@ -55,8 +55,12 @@ open class HBG5DbTable {
             }
             return true
         }
+        var query = "ALTER TABLE $name ADD COLUMN $fName ${fType.value}"
+        if(fDefault.isNotEmpty()) {
+            query += " DEFAULT $fDefault"
+        }
 
-        return database.execSql(sql = "ALTER TABLE $name ADD COLUMN $fName ${fType.value}")
+        return database.execSql(sql = query)
     }
     /** 存在欄位 */
     fun hasField(database: HBG5Database, fName: String) : Boolean {

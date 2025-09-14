@@ -7,6 +7,7 @@ import priv.liten.hbg5_extension.hideKeyboard
 import priv.liten.hbg5_extension.toCalendar
 import priv.liten.hbg5_widget.bin.button.HBG5Button
 import priv.liten.hbg5_data.HBG5Date
+import priv.liten.hbg5_extension.showDayPicker
 import priv.liten.hbg5_widget.bin.text.HBG5TextView
 import priv.liten.hbg5_widget.config.HBG5WidgetConfig
 
@@ -75,6 +76,7 @@ class HBG5DateAlert: HBG5BaseAlert {
         uiTitle.v5Text = title
         uiTitle.v5Visibility = if(title.isEmpty()) HBG5WidgetConfig.Attrs.Visibility.Gone else HBG5WidgetConfig.Attrs.Visibility.Visible
 
+        datePicker.showDayPicker()
         datePicker.init(
             dataRequest.date.year,
             dataRequest.date.month,

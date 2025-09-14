@@ -8,7 +8,6 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.net.ConnectivityManager
@@ -16,7 +15,6 @@ import android.net.NetworkCapabilities
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.Settings
 import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.annotation.RawRes
@@ -30,14 +28,12 @@ import kotlinx.coroutines.launch
 import priv.liten.hbg.BuildConfig
 import priv.liten.hbg5_config.HBG5HttpConfig
 import priv.liten.hbg5_extension.exists
+import priv.liten.hbg5_extension.getPrivateUri
 import priv.liten.hbg5_extension.toString
 import priv.liten.hbg5_extension.toUri
 import priv.liten.hbg5_widget.bin.activity.HBG5LaunchActivity
-import priv.liten.hbg5_widget.bin.fragment.HBG5Fragment
-import priv.liten.hbg5_widget.config.HBG5WidgetConfig
 import java.io.File
 import java.lang.ref.WeakReference
-import java.lang.reflect.Type
 import java.util.Calendar
 import kotlin.system.exitProcess
 
@@ -166,52 +162,6 @@ open class HBG5Application: Application() {
         else true
     }
 
-    /** 生成快取資料夾路徑 */
-    fun buildDirUriString(): String? {
-        val cacheDir = externalCacheDir ?: return null
-        if(!cacheDir.exists() && !cacheDir.mkdirs()) { return null }
-        val cacheDirUriString = cacheDir.absolutePath
-        return cacheDirUriString.ifEmpty { null }
-    }
-
-    /**
-     * 取得應用預設保存資料路徑
-     * @param fileName is empty will use random name
-     * @param fileType .jpg .png
-     */
-    fun buildFileUriString(fileName: String = "", fileType: String = "", randomNameHeader: String = "Default"): String? {
-        val appFileDirUriString = buildDirUriString() ?: return null
-        if(appFileDirUriString.isEmpty()) { return null }
-        val newFileName = buildFileName(
-            fileName = fileName,
-            fileType = fileType,
-            randomNameHeader = randomNameHeader
-        )
-
-        return File("${appFileDirUriString}${File.separatorChar}${newFileName}")
-            .toUri(context = this)
-            .toString()
-    }
-
-    /**
-     * 取得應用檔案名稱
-     */
-    fun buildFileName(fileName: String = "", fileType: String = "", randomNameHeader: String = "Default"): String {
-        var newFileName = fileName.trim()
-
-        newFileName =
-            if(newFileName.isEmpty()) {
-                val counter = "%04d".format(FILE_NAME_COUNTER_ABS)
-                val time = Calendar.getInstance().toString(format = "yyyyMMddHHmmssSSS")
-                "${randomNameHeader}_${time}_$counter$fileType"
-            }
-            else {
-                "${newFileName}${fileType}"
-            }
-
-        return newFileName
-    }
-
     /**取得網路連接狀態*/
     suspend fun getNetConnectedType(): HBG5HttpConfig.NetConnectedType {
         val connectManager = getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager
@@ -266,4 +216,54 @@ fun HBG5Application.exit() {
         delay(500)
         exitProcess(0)
     }
+}
+
+
+//fun Context.
+
+
+
+///** todo hbg 私有應用不需讀寫權限，生成快取資料夾路徑 */
+//fun Context.buildCacheDirUriString(): String? {
+//    val cacheDir = externalCacheDir ?: return null
+//    if(!cacheDir.exists() && !cacheDir.mkdirs()) { return null }
+//    val cacheDirUriString = cacheDir.absolutePath
+//    return cacheDirUriString.ifEmpty { null }
+//}
+//
+///** todo hbg 私有應用不需讀寫權限，取得應用預設保存資料路徑
+// * @param fileName is empty will use random name
+// * @param fileType .jpg .png
+// */
+//fun Context.buildCacheFileUriString(fileName: String = "", fileType: String = "", randomNameHeader: String = "Default"): String? {
+//    val appFileDirUriString = buildCacheDirUriString() ?: return null
+//    if(appFileDirUriString.isEmpty()) { return null }
+//    val newFileName = buildFileName(
+//        fileName = fileName,
+//        fileType = fileType,
+//        randomNameHeader = randomNameHeader
+//    )
+//
+//    return File("${appFileDirUriString}${File.separatorChar}${newFileName}")
+//        .toUri(context = this)
+//        .toString()
+//}
+
+
+/** todo hbg 取得應用檔案名稱 如不輸入則產生隨機檔名
+ */
+fun Context.buildFileName(fileName: String = "", fileType: String = "", randomNameHeader: String = "Default"): String {
+    var newFileName = fileName.trim()
+
+    newFileName =
+        if(newFileName.isEmpty()) {
+            val counter = "%04d".format(HBG5Application.FILE_NAME_COUNTER_ABS)
+            val time = Calendar.getInstance().toString(format = "yyyyMMddHHmmssSSS")
+            "${randomNameHeader}_${time}_$counter$fileType"
+        }
+        else {
+            "${newFileName}${fileType}"
+        }
+
+    return newFileName
 }

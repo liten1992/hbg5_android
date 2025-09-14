@@ -262,11 +262,14 @@ class HBG5HttpService private constructor() {
                 @Body body: RequestBody?
             ): Call<String?>?
 
+            /**下載檔案 todo hbg*/
             @Streaming
-            @GET
+            @POST
             fun download(
                 @Url url: String?,
-                @Header("HEADERS") headers: String?
+                @Header("HEADERS") headers: String?,
+                @Header("URL-METHOD") urlMethod: String?,
+                @Body body: RequestBody?
             ): Call<ResponseBody?>?
         }
     }

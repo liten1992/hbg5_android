@@ -12,6 +12,7 @@ import priv.liten.hbg5_widget.bin.layout.HBG5FrameLayout
 import priv.liten.hbg5_data.HBG5Date
 import priv.liten.hbg5_data.HBG5Time
 import priv.liten.hbg5_extension.exists
+import priv.liten.hbg5_extension.getPrivateUri
 import priv.liten.hbg5_widget.bin.fragment.HBG5Fragment
 import priv.liten.hbg5_widget.config.HBG5WidgetConfig
 
@@ -202,7 +203,11 @@ interface HBG5FragmentImpl {
                     throw Exception("未知的檔案類型")
                 }
                 val fileName = "${uri.md5()}${fileType}"
-                val fileUriString = context.buildFileUriString(fileName = fileName) ?: throw Exception("找不到可提取資料夾")
+                // todo hbg5
+                val fileUriString = context.getPrivateUri(dirName = HBG5WidgetConfig.PRIVATE_DIR_DOWNLOAD, fileName = fileName).toString()
+                if(fileUriString.isEmpty()) {
+                    throw Exception("找不到可提取資料夾")
+                }
                 val fileUri = Uri.parse(fileUriString)
                 val fileExist: Boolean = fileUri.exists()
                 if(!fileExist) {

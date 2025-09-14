@@ -19,27 +19,6 @@ fun Calendar.betweenDays(to: Calendar): Int {
     }
 }
 
-fun Calendar.toYMDIntArray(): IntArray {
-
-    return intArrayOf(
-        get(Calendar.YEAR),
-        get(Calendar.MONTH),
-        get(Calendar.DAY_OF_MONTH))
-}
-
-fun Calendar.toYMDInt(): Int {
-    return get(Calendar.YEAR)*10000 + get(Calendar.MONTH)*100 + get(Calendar.DAY_OF_MONTH)
-}
-
-fun Calendar.toHMSInt(): Int {
-    return get(Calendar.HOUR_OF_DAY)*10000 + get(Calendar.MINUTE)*100 + get(Calendar.SECOND)
-}
-
-fun Calendar.gmt(gmt: Int = TimeZone.getDefault().rawOffset / 3600000): Calendar {
-    this.timeZone = TimeZone.getTimeZone("GMT+$gmt")
-    return this
-}
-
 /** 設置日期為當周第一天 */
 fun Calendar.toStartWeekCalendar(timeInMillis: Long? = null): Calendar {
     timeInMillis?.let { this.timeInMillis = it }
@@ -62,16 +41,19 @@ fun Calendar.toLastDayOfMonthCalendar(): Calendar {
     return this
 }
 /**@param format:yyyy-MM-dd*/
-fun Calendar.toString(format: String) : String {
-
-    val sdf = SimpleDateFormat(format, Locale.ENGLISH)
-    sdf.timeZone = this.timeZone
+fun Calendar.toString(format: String, utc: Int? = null) : String {
+    val sdf = SimpleDateFormat(format, Locale.getDefault())
+    sdf.timeZone = when (utc) {
+        null -> this.timeZone ?: TimeZone.getDefault()
+        else -> TimeZone.getTimeZone("GMT%+03d".format(utc))
+    }
 
     return sdf.format(this.time)
 }
 
 fun Calendar.set(date: HBG5Date, time: HBG5Time): Calendar {
     this.set(date.year, date.month, date.day, time.hour, time.minute, time.second)
+    this.set(Calendar.MILLISECOND, 0)
     return this
 }
 
@@ -82,3 +64,25 @@ fun Calendar.onAppend(field: Int, amount: Int): Calendar {
     result.add(field, amount)
     return result
 }
+/** todo hbg */
+fun Calendar.initUtc(utc: Int): Calendar {
+    val result = Calendar.getInstance(TimeZone.getTimeZone("GMT%+03d".format(utc)))
+    result.timeInMillis = this.timeInMillis
+    return result
+}
+/** todo hbg year * 12 + month */
+fun Calendar.months(): Int {
+    return this.get(Calendar.YEAR) * 12 + this.get(Calendar.MONTH)
+}
+
+// todo hbg delete
+//fun Calendar.toYMDIntArray(): IntArray
+
+// todo hbg delete
+//fun Calendar.toYMDInt(): Int
+
+// todo hbg delete
+//fun Calendar.toHMSInt(): Int
+
+// todo hbg delete
+//fun Calendar.gmt(gmt: Int): Calendar

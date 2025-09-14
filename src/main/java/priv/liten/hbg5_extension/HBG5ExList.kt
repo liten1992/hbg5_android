@@ -120,6 +120,18 @@ fun <T> List<T>.indexOfRange(call: ((List<T>) -> Int)): Int {
 fun <T, P> Map<T, P>.isSingle(): Boolean = this.size == 1
 /**todo hbg*/
 fun <T, P> Map<T, P>.isMultiple(): Boolean = this.size > 1
+/**todo hbg 合併列表(不重複)*/
+fun <T> List<T>.unionUnique(other: List<T>): List<T> {
+    if(this.size + other.size == 0) { return emptyList() }
+    val result = ArrayList<T>(this.size + other.size)
+    for(list in arrayOf(this, other)) {
+        for(item in list) {
+            if(result.contains(item)) { continue }
+            result.add(item)
+        }
+    }
+    return result
+}
 
 fun <T> MutableList<T>.update(item: T) {
     val index = this.indexOf(item)

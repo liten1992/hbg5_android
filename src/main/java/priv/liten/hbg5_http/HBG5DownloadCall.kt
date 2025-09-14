@@ -1,9 +1,12 @@
 package priv.liten.hbg5_http
 
 import android.net.Uri
+import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+import okhttp3.MediaType
+import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import priv.liten.base_extension.readFileType
 import priv.liten.hbg.BuildConfig
@@ -12,8 +15,11 @@ import priv.liten.hbg5_extension.md5
 import priv.liten.hbg5_extension.toJson
 import priv.liten.hbg5_extension.toUri
 import priv.liten.hbg5_data.HBG5DownloadData
+import priv.liten.hbg5_extension.getPrivatePath
+import priv.liten.hbg5_extension.getPrivateUri
 import priv.liten.hbg5_http.bin.HBG5ApiCall
 import priv.liten.hbg5_widget.application.HBG5Application
+import priv.liten.hbg5_widget.config.HBG5WidgetConfig
 import retrofit2.Call
 import java.io.File
 import java.io.FileInputStream
@@ -143,7 +149,8 @@ class HBG5DownloadCall: HBG5ApiCall<HBG5DownloadData> {
     private var action: Call<ResponseBody?>? = null
 
     // MARK:- ====================== Method
-    fun buildFileDir() : String? = HBG5Application.instance?.buildDirUriString()
+    /** todo hbg ex: /sdcard/{pkg}/... */
+    fun buildFileDirPath() : String? = HBG5Application.instance?.getPrivatePath(dirName = HBG5WidgetConfig.PRIVATE_DIR_DOWNLOAD)
 
     fun buildFileName(url:String?) : String? {
         return url?.md5()
@@ -200,7 +207,7 @@ class HBG5DownloadCall: HBG5ApiCall<HBG5DownloadData> {
             // 中斷判斷
             if (status != Status.RUNNING) { throw Exception("Execute cancel") }
 
-            val fileDirPath = buildFileDir() ?: throw NullPointerException("Not found save file dir")
+            val fileDirPath = buildFileDirPath() ?: throw NullPointerException("Not found save file dir")
             val fileDir = File(fileDirPath); File(fileDirPath).mkdirs()
             val fileName = buildFileName(url) ?: throw NullPointerException("Can not build file name")
             val filePath = "$fileDirPath${File.separator}$fileName"
@@ -227,8 +234,20 @@ class HBG5DownloadCall: HBG5ApiCall<HBG5DownloadData> {
                 }
             }
 
-            // 下載檔案
-            action = service.value?.download(url = url, headers = headers)
+            // 下載檔案 todo hbg5
+            action = service.value?.download(
+                url = url,
+                headers = headers,
+                urlMethod = method,
+                body = apiRequest.body?.let { body ->
+                    val json = Gson().toJson(body)
+                    RequestBody.create(
+                        MediaType.parse("application/json"),
+                        json
+                    )
+                }
+            )
+
 
             val exeResponse = action?.execute() ?: throw NullPointerException("Not found execute response")
             data.statusCode = exeResponse.code().toString()

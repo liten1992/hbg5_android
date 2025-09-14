@@ -15,6 +15,7 @@ import priv.liten.hbg5_database.HBG5DSL.Field
 import priv.liten.hbg5_extension.getBooleanOrNull
 import priv.liten.hbg5_extension.getJsonArrayOrNull
 import priv.liten.hbg5_extension.getJsonOrNull
+import priv.liten.hbg5_extension.throwIfFalse
 import priv.liten.hbg5_extension.toJson
 
 /**物件化語法生成*/
@@ -58,7 +59,7 @@ object HBG5DSL {
 
         fun execute(database: HBG5Database): Boolean = database.execSql(this.build())
         @Throws
-        fun executeOrThrow(database: HBG5Database, message: String = "Insert DB Failed") {
+        fun executeOrThrow(database: HBG5Database, message: String = "Insert Row Failed") {
             if(!execute(database)) { throw Exception(message) }
         }
     }
@@ -77,7 +78,8 @@ object HBG5DSL {
             fieldList.addAll(fields.map { field ->
                 val value = field.value ?: field.default
 
-                "${field.name} = ${if(value != null) sqlValue(value) else "NULL"}"
+                return@map if(field.function != null) "${field.name} = ${field.function!!.buildField(field = field.name)}"
+                    else "${field.name} = ${if(value != null) sqlValue(value) else "NULL"}"
             })
             return this
         }
@@ -113,9 +115,7 @@ object HBG5DSL {
 
         fun execute(database: HBG5Database): Boolean = database.execSql(this.build())
         @Throws
-        fun executeOrThrow(database: HBG5Database, message: String = "Update DB Failed") {
-            if(!execute(database)) throw Exception(message)
-        }
+        fun executeOrThrow(database: HBG5Database, message: String = "Update Row Failed") = execute(database).throwIfFalse { Exception(message) }
     }
     /**查詢語法產生器*/
     class Selector {
@@ -203,10 +203,12 @@ object HBG5DSL {
             val fieldTableName = if(field.table.isNotEmpty()) "${field.table}.${field.name}" else field.name
 
             val fieldTableDefaultName =
-                if(field.default != null && field.nick.isNotEmpty()) "COALESCE($fieldTableName, ${sqlValue(field.default!!)})"
+                if(field.nick.isNotEmpty() && field.default != null) "COALESCE($fieldTableName, ${sqlValue(field.default!!)})"
                 else fieldTableName
 
-            val fieldTableDefaultFuncName = field.function?.buildField(fieldTableDefaultName) ?: fieldTableDefaultName
+            val fieldTableDefaultFuncName =
+                if(field.nick.isNotEmpty()) field.function?.buildField(fieldTableDefaultName) ?: fieldTableDefaultName
+                else fieldTableDefaultName
 
             val fieldTableDefaultAsName =
                 if(field.nick.isNotEmpty()) "$fieldTableDefaultFuncName AS ${field.nick}"
@@ -302,7 +304,6 @@ object HBG5DSL {
     /**刪除語法產生器*/
     class Deleter {
         private var tableName: String = ""
-        private var where: String = ""
         private var condition: String = ""
 
         fun table(table: Table): Deleter {
@@ -335,15 +336,14 @@ object HBG5DSL {
 
         fun build(): String = listOf(
             "DELETE FROM $tableName",
-            if(where.isEmpty()) "" else "WHERE $where"
+            if(condition.isEmpty()) "" else "WHERE $condition"
         )
             .filter { it.isNotEmpty() }
             .toLinkString(linkText = " ")
 
         fun execute(database: HBG5Database): Boolean = database.execSql(this.build())
         @Throws
-        fun executeOrThrow(database: HBG5Database, message: String = ""): Cursor = database.querySqlCursor(this.build())
-            ?: throw NullPointerException(message.ifEmpty { "Not found database cursor" })
+        fun executeOrThrow(database: HBG5Database, message: String = "Delete Row Failed") = execute(database).throwIfFalse { Exception(message) }
     }
     /**條件語法產生器*/
     class Condition {
@@ -363,6 +363,7 @@ object HBG5DSL {
         enum class ThanMode {
             EQUALS, LIKE, MORE, MORE_EQUALS, LESS, LESS_EQUALS;
         }
+
         /**啟用條件*/
         private var enable: Boolean = true
         /**停用限制 如果 條件 NULL*/
@@ -440,6 +441,8 @@ object HBG5DSL {
                     is List<*> -> fieldValue.filterNotNull().map { sqlValue(it) }.toLinkString(linkText = ", ")
                     // 表單
                     is Selector -> fieldValue.build()
+                    // 欄位
+                    is Field -> if(fieldValue.table.isNotEmpty()) "${fieldValue.table}.${fieldValue.name}" else fieldValue.name
                     // 不套用
                     else -> ""
                 }
@@ -447,8 +450,8 @@ object HBG5DSL {
                 commandQuerySelf =
                     when(than) {
                         ThanMode.EQUALS -> when(field.value) {
-                            // 布林、數值、字串型別
-                            is Boolean, is Number, is String ->
+                            // 布林、數值、字串型別、欄位
+                            is Boolean, is Number, is String, is Field ->
                                 if(!not) "$fieldFullName = $fieldValue"
                                 else "$fieldFullName != $fieldValue"
                             // 區間、表單型別
@@ -571,6 +574,7 @@ object HBG5DSL {
         var name: String
         var nick: String
         var default: Any?
+        /** Boolean, Number, String, Field, List<*>, Selector, */
         var value: Any?
         var type: HBG5DbConfig.FieldType
         var cursor: Int? = null
@@ -585,6 +589,19 @@ object HBG5DSL {
         }
         class Distinct: Function() {
             override fun buildField(field: String): String = "DISTINCT($field)"
+        }
+        class Count: Function() {
+            override fun buildField(field: String): String = "COUNT($field)"
+        }
+        class Sum: Function() {
+            override fun buildField(field: String): String = "SUM($field)"
+        }
+        class Max: Function() {
+            override fun buildField(field: String): String = "MAX($field)"
+        }
+        /** CASE WHEN THEN WHEN THEN ELSE END */
+        class IfElse(private val raw: CharSequence): Function() {
+            override fun buildField(field: String): String = raw.toString()
         }
     }
 
@@ -619,7 +636,7 @@ object HBG5DSL {
         is CharSequence -> "'${value.toString().replace("'", "''")}'"
         is Number -> value.toString()
         is Boolean -> if(value) "1" else "0"
-        else -> "'${value.toJson()}'"
+        else -> "'${value.toJson().replace("'", "''")}'"
     }
 }
 
@@ -644,16 +661,9 @@ fun Field.function(function: Field.Function?): Field {
 }
 
 /** 設置欄位的數值 NEW MEM */
-fun Field.value(default: Any? = this.default, value: Any? = this.value): Field {
+fun Field.value(default: Any? = this.default, value: Any?): Field {
     val newField = copy()
-    newField.value = when(value) {
-        is Boolean,
-        is Number,
-        is CharSequence,
-        is List<*>,
-        is HBG5DSL.Selector -> value
-        else -> value?.toJson()
-    }
+    newField.value = value
     newField.default = when(default) {
         is Boolean,
         is Number,

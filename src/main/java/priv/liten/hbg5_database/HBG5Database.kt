@@ -2,24 +2,16 @@ package priv.liten.hbg5_database
 
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
-import android.os.Environment
 import android.util.Log
-import androidx.core.database.getDoubleOrNull
-import androidx.core.database.getFloatOrNull
-import androidx.core.database.getIntOrNull
 import androidx.core.database.getLongOrNull
-import androidx.core.database.getStringOrNull
 import com.google.gson.Gson
 import priv.liten.base_extension.mapFirst
 import priv.liten.hbg.BuildConfig
+import priv.liten.hbg5_extension.getPrivatePath
 
-import priv.liten.hbg5_config.HBG5DbConfig
-import priv.liten.hbg5_extension.getBooleanOrNull
-import priv.liten.hbg5_extension.getJsonArrayOrNull
-import priv.liten.hbg5_extension.getJsonOrNull
 import priv.liten.hbg5_extension.toLinkString
 import priv.liten.hbg5_widget.application.HBG5Application
-import java.io.File
+import priv.liten.hbg5_widget.config.HBG5WidgetConfig
 
 open class HBG5Database {
 
@@ -183,9 +175,10 @@ open class HBG5Database {
 
         val context = HBG5Application.instance!!
 
-        val dir = context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)!!
-
-        return "${dir.absolutePath}${File.separator}${dbName()}"
+        return context.getPrivatePath(
+            dirName = HBG5WidgetConfig.PRIVATE_DIR_DOCUMENTS,
+            fileName = dbName()
+        ) ?: ""
     }
 
     fun openDB(version: Long? = null) : Boolean {
@@ -195,9 +188,7 @@ open class HBG5Database {
             return true
         }
 
-        val dbPath = dbPath()
-
-        db = SQLiteDatabase.openOrCreateDatabase(dbPath, null)
+        db = SQLiteDatabase.openOrCreateDatabase(dbPath(), null)
 
         version?.let { this.version = it }
 
