@@ -3,6 +3,6 @@ jdk:
 before_install:
   - chmod +x gradlew
   - echo "sdk.dir=$ANDROID_HOME" > local.properties
-  - yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-33" "build-tools;33.0.2" || true
+  #- yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-33" "build-tools;33.0.2" || true
 install:
   - ./gradlew --no-daemon clean publishReleasePublicationToMavenLocal -x test

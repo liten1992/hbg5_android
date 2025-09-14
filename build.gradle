@@ -84,7 +84,7 @@ publishing {
         register("release", MavenPublication) {
             groupId = "com.github.liten1992"
             artifactId = "hbg5_android"   // 之後依這個當 artifactId
-            version = "25.08.12.01"             // 本地驗證用；JitPack 以 Git tag 為準
+            version = "25.08.12.02"             // 本地驗證用；JitPack 以 Git tag 為準
             afterEvaluate { from components.release }
             pom {
                 name = artifactId
