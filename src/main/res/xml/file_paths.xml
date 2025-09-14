@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <root-path
+        name="root"
+        path="app/" />
+    <files-path
+        name="files"
+        path="app/files/" />
+
+    <cache-path
+        name="cache"
+        path="app/cache/." />
+
+    <external-path
+        name="sdcard"
+        path="." />
+
+    <external-files-path
+        name="external_files"
+        path="app/ext_files/." />
+
+    <external-cache-path
+        name="external_cache_path"
+        path="app/ext_cache/." />
+</paths>
+
+    <!--    files-path：對應的是 App 的 internal storage。-->
+
+    <!--    cache-path：對應的是 App 的 internal storage，但是是屬於 cache file。-->
+
+    <!--    external-path：對應 App 的 external storage。-->
+
+    <!--    external-files-path：對應 App 的 external private storage。-->
+
+    <!--    external-cache-path：對應 App 的 external cache storage。-->
+
+    <!--    external-media-path：對應 App 的 externalMediaDirs。-->
+
+<!--    在paths节点下支持以下几个子节点：-->
+
+<!--    2.1、< root-path/> 配置设备的根目录-->
+<!--    配置了这个节点就代表根目录/xiaoi/shrq/对应的目录及其子目录被公开暴露出去了，即FileProvider需要给根目录/xiaoi/shrq/对应的目录及其子目录下的文件创建对应的URI，下同。-->
+
+<!--    2.2、< files-path/> 配置Context.getFilesDir()-->
+<!--    配置了这个节点就代表context.getFilesDir()/xiaoi/shrq/files/.对应的目录及其子目录被公开暴露出去了。-->
+
+<!--    2.3、< cache-path/> 配置Context.getCacheDir()-->
+<!--    配置了这个节点就代表context.getCacheDir()/xiaoi/shrq/cache/.对应的目录及其子目录被公开暴露出去了。-->
+
+<!--    2.4、< external-files-path/> 配置Context.getExternalFilesDirs()-->
+<!--    配置了这个节点就代表context.getExternalFilesDirs()/xiaoi/shrq/ext_file/.对应的目录及其子目录被公开暴露出去了。-->
+
+<!--    2.5、< external-path/> 配置Environment.getExternalStorageDirectory()-->
+<!--    配置了这个节点就代表Environment.getExternalStorageDirectory()+ /path值/对应的目录及其子目录被公开暴露出去了。-->
+
+<!--    2.6、< external-cache-path/> 配置getExternalCacheDir()-->
+<!--    配置了这个节点就代表context.getExternalCacheDir() + /path值/对应的目录及其子目录被公开暴露出去了。-->
+<!--    ————————————————-->
+<!--    版权声明：本文为CSDN博主「CrazyMo_」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。-->
+<!--    原文链接：https://blog.csdn.net/CrazyMo_/article/details/102569375-->

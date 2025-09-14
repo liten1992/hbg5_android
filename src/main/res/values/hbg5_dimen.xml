@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--  TextSize  -->
+    <dimen name="hbg5_text_size_largest">32sp</dimen>
+    <dimen name="hbg5_text_size_larger">24sp</dimen>
+    <dimen name="hbg5_text_size_large">18sp</dimen>
+    <dimen name="hbg5_text_size_normal">15sp</dimen>
+    <dimen name="hbg5_text_size_small">12sp</dimen>
+    <dimen name="hbg5_text_size_smaller">9sp</dimen>
+
+    <dimen name="hbg5_alert_margin">36dp</dimen>
+    <dimen name="hbg5_alert_margin1.5x">54dp</dimen>
+    <dimen name="hbg5_alert_margin2x">72dp</dimen>
+    <dimen name="hbg5_alert_margin3x">108dp</dimen>
+</resources>

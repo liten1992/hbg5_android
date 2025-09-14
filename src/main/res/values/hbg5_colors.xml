@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="hbg5_white">#ffffff</color>
+    <color name="hbg5_light">#dddddd</color>
+    <color name="hbg5_silver">#bbbbbb</color>
+    <color name="hbg5_gray">#888888</color>
+    <color name="hbg5_iron">#555555</color>
+    <color name="hbg5_dark">#333333</color>
+    <color name="hbg5_black">#000000</color>
+    <color name="hbg5_clear">#00000000</color>
+
+    <color name="hbg5_red_light">#FF6B6B</color>
+    <color name="hbg5_red">#D30D0D</color>
+    <color name="hbg5_red_dark">#9A0909</color>
+
+    <color name="hbg5_yellow">#FFD700</color>
+    <color name="hbg5_orange">#F67300</color>
+    <color name="hbg5_coffee">#603007</color>
+
+    <color name="hbg5_green_light">#8CDA70</color>
+    <color name="hbg5_green">#449A17</color>
+    <color name="hbg5_green_dark">#307E0F</color>
+
+    <color name="hbg5_azure">#F0FFFF</color>
+    <color name="hbg5_cyan">#36DDDD</color>
+    <color name="hbg5_turquoise">#4ABFB4</color><!-- 綠松石色 -->
+    <color name="hbg5_teal">#008080</color><!-- 鳧綠色 -->
+
+    <color name="hbg5_blue_light">#53ACFA</color>
+    <color name="hbg5_blue">#3D67F4</color>
+    <color name="hbg5_blue_dark">#06439E</color>
+
+    <color name="hbg5_violet">#7F00FF</color><!-- 紫羅蘭色 -->
+    <color name="hbg5_purple">#6A0DAD</color>
+    <color name="hbg5_pansy">#600085</color><!-- 三色堇紫 -->
+
+    <color name="hbg5_orchid">#DA70D6</color><!-- 蘭紫 -->
+    <color name="hbg5_camellia">#E63995</color><!-- 山茶紅 -->
+    <color name="hbg5_carmine">#C80050</color><!-- 胭脂紅 -->
+
+</resources>

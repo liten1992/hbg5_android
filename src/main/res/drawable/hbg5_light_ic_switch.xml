@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true">
+        <layer-list>
+            <item>
+                <shape android:shape="rectangle">
+                    <solid android:color="@color/hbg5_green"/>
+                    <size android:width="44dp" android:height="24dp" />
+                    <corners android:radius="12dp"/>
+                </shape>
+            </item>
+
+            <item android:start="22dp" android:end="2dp" android:top="2dp" android:bottom="2dp">
+                <shape android:shape="rectangle">
+                    <solid android:color="@color/hbg5_white"/>
+                    <size android:height="20dp" android:width="20dp"/>
+                    <corners android:radius="10dp"/>
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+
+    <item>
+        <layer-list>
+            <item>
+                <shape android:shape="rectangle">
+                    <solid android:color="@color/hbg5_silver"/>
+                    <size android:width="44dp" android:height="24dp" />
+                    <corners android:radius="12dp"/>
+                </shape>
+            </item>
+
+            <item android:start="2dp" android:end="22dp" android:top="2dp" android:bottom="2dp">
+                <shape android:shape="rectangle">
+                    <solid android:color="@color/hbg5_white"/>
+                    <size android:height="20dp" android:width="20dp"/>
+                    <corners android:radius="10dp"/>
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+
+    <!--    <item android:state_checked="false">-->
+
+    <!--        <shape android:shape="rectangle">-->
+    <!--            <solid android:color="#ffffff"/>-->
+    <!--            <size android:height="40dp"-->
+    <!--                android:width="50dp"/>-->
+    <!--            <corners android:radius="40dp"/>-->
+    <!--            <stroke android:width="2dp"-->
+    <!--                android:color="#cdcdcd"/>-->
+    <!--        </shape>-->
+    <!--    </item>-->
+</selector>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hbg5_widget_n_year">年</string>
+    <string name="hbg5_widget_n_month">月</string>
+    <string name="hbg5_widget_n_day">日</string>
+
+    <string name="hbg5_deprecated_widget_n_hour">时</string>
+    <string name="hbg5_deprecated_widget_n_hour_am">上午</string>
+    <string name="hbg5_deprecated_widget_n_hour_pm">下午</string>
+
+    <string name="hbg5_widget_n_minute">分</string>
+
+    <string name="hbg5_widget_n_confirm">Confirm</string>
+    <string name="hbg5_widget_n_cancel">Cancel</string>
+
+    <string name="hbg5_deprecated_widget_n_month_01">1月</string>
+    <string name="hbg5_deprecated_widget_n_month_02">2月</string>
+    <string name="hbg5_deprecated_widget_n_month_03">3月</string>
+    <string name="hbg5_deprecated_widget_n_month_04">4月</string>
+    <string name="hbg5_deprecated_widget_n_month_05">5月</string>
+    <string name="hbg5_deprecated_widget_n_month_06">6月</string>
+    <string name="hbg5_deprecated_widget_n_month_07">7月</string>
+    <string name="hbg5_deprecated_widget_n_month_08">8月</string>
+    <string name="hbg5_deprecated_widget_n_month_09">9月</string>
+    <string name="hbg5_deprecated_widget_n_month_10">10月</string>
+    <string name="hbg5_deprecated_widget_n_month_11">11月</string>
+    <string name="hbg5_deprecated_widget_n_month_12">12月</string>
+    <string-array name="hbg5_deprecated_widget_n_month_list">
+        <item>@string/hbg5_deprecated_widget_n_month_01</item>
+        <item>@string/hbg5_deprecated_widget_n_month_02</item>
+        <item>@string/hbg5_deprecated_widget_n_month_03</item>
+        <item>@string/hbg5_deprecated_widget_n_month_04</item>
+        <item>@string/hbg5_deprecated_widget_n_month_05</item>
+        <item>@string/hbg5_deprecated_widget_n_month_06</item>
+        <item>@string/hbg5_deprecated_widget_n_month_07</item>
+        <item>@string/hbg5_deprecated_widget_n_month_08</item>
+        <item>@string/hbg5_deprecated_widget_n_month_09</item>
+        <item>@string/hbg5_deprecated_widget_n_month_10</item>
+        <item>@string/hbg5_deprecated_widget_n_month_11</item>
+        <item>@string/hbg5_deprecated_widget_n_month_12</item>
+    </string-array>
+
+    <string name="hbg5_widget_n_week_1">周一</string>
+    <string name="hbg5_widget_n_week_2">周二</string>
+    <string name="hbg5_widget_n_week_3">周三</string>
+    <string name="hbg5_widget_n_week_4">周四</string>
+    <string name="hbg5_widget_n_week_5">周五</string>
+    <string name="hbg5_widget_n_week_6">周六</string>
+    <string name="hbg5_widget_n_week_7">周日</string>
+    <string-array name="hbg5_widget_n_week_list">
+        <item>@string/hbg5_widget_n_week_1</item>
+        <item>@string/hbg5_widget_n_week_2</item>
+        <item>@string/hbg5_widget_n_week_3</item>
+        <item>@string/hbg5_widget_n_week_4</item>
+        <item>@string/hbg5_widget_n_week_5</item>
+        <item>@string/hbg5_widget_n_week_6</item>
+        <item>@string/hbg5_widget_n_week_7</item>
+    </string-array>
+
+    <string name="hbg5_widget_n_back">返回</string>
+    <string name="hbg5_widget_n_running">執行中</string>
+    <string name="hbg5_widget_n_biometrics">生物辨識</string>
+</resources>

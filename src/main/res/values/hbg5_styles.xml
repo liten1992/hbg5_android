@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="WhiteAccent">
+        <item name="colorAccent">@color/hbg5_light</item> <!-- Whatever color you want-->
+        <item name="android:colorAccent">@color/hbg5_light</item> <!-- Whatever color you want-->
+    </style>
+
+    <style name="HBG5"/>
+    <style name="HBG5.Theme"/>
+    <style name="HBG5.Theme.Base" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorSecondary">@color/hbg5_dark</item>
+    </style>
+
+
+    <!-- Text -->
+    <style name="HBG5.Theme.Base.TextView" parent="Widget.AppCompat.TextView">
+
+        <item name="android:ellipsize">end</item>
+
+        <item name="v5Touchable">false</item>
+
+        <item name="v5TextSize">@dimen/hbg5_text_size_normal</item>
+        <item name="v5TextColor">@color/hbg5_dark</item>
+        <item name="v5TextColorUnable">@color/hbg5_gray</item>
+        <item name="v5TextAlignmentVertical">top</item>
+        <item name="v5TextAlignmentHorizontal">start</item>
+
+        <item name="v5BackgroundColor">@null</item>
+        <item name="v5BackgroundColorPressed">@null</item>
+        <item name="v5BackgroundColorChecked">@null</item>
+
+        <item name="v5Padding">2dp</item>
+    </style>
+
+    <!-- Button -->
+    <style name="HBG5.Theme.Base.Button" parent="Widget.AppCompat.Button.Borderless">
+
+        <item name="android:minWidth">0dp</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:padding">0dp</item>
+
+        <item name="v5Padding">8dp</item>
+        <item name="v5PaddingStart">@null</item>
+        <item name="v5PaddingEnd">@null</item>
+        <item name="v5PaddingTop">@null</item>
+        <item name="v5PaddingBottom">@null</item>
+
+        <item name="v5Touchable">true</item>
+
+        <item name="v5BackgroundRadius">4dp</item>
+        <item name="v5BackgroundColor">@color/hbg5_iron</item>
+        <item name="v5BackgroundColorPressed">@color/hbg5_dark</item>
+        <item name="v5BackgroundColorChecked">@color/hbg5_black</item>
+
+        <item name="v5HintColor">@color/hbg5_gray</item>
+
+        <item name="v5TextSize">@dimen/hbg5_text_size_normal</item>
+        <item name="v5TextColor">@color/hbg5_white</item>
+        <item name="v5TextColorPressed">@null</item>
+        <item name="v5TextColorChecked">@null</item>
+        <item name="v5TextColorUnable">@color/hbg5_gray</item>
+
+        <item name="v5TextAlignmentVertical">center</item>
+        <item name="v5TextAlignmentHorizontal">center</item>
+    </style>
+    <style name="HBG5.Theme.Base.CheckButton" parent="HBG5.Theme.Base.Button">
+        <item name="v5Checkable">true</item>
+    </style>
+    <style name="HBG5.Theme.Base.RadioButton" parent="HBG5.Theme.Base.Button">
+        <item name="v5Checkable">true</item>
+    </style>
+    <style name="HBG5.Theme.Base.ImageButton">
+        <item name="v5Touchable">true</item>
+        <item name="v5BackgroundRadius">fill</item>
+        <item name="v5BackgroundColor">@color/hbg5_clear</item>
+        <item name="v5BackgroundColorPressed">@color/hbg5_light</item>
+        <item name="v5BackgroundColorChecked">@color/hbg5_clear</item>
+    </style>
+    <style name="HBG5.Theme.Base.ImageButton.Clear">
+        <item name="v5Touchable">true</item>
+        <item name="v5BackgroundRadius">fill</item>
+        <item name="v5BackgroundColor">@color/hbg5_clear</item>
+        <item name="v5BackgroundColorPressed">@null</item>
+        <item name="v5BackgroundColorChecked">@null</item>
+    </style>
+
+    <!-- Input -->
+    <style name="HBG5.Theme.Base.TextInput" parent="Widget.AppCompat.EditText">
+
+        <item name="android:maxLines">1</item>
+        <item name="android:inputType">text</item>
+
+        <item name="v5Touchable">true</item>
+
+        <item name="v5BackgroundColor">@color/hbg5_white</item>
+        <item name="v5BackgroundColorPressed">@color/hbg5_white</item>
+        <item name="v5BackgroundColorChecked">@color/hbg5_white</item>
+        <item name="v5BackgroundColorUnable">@color/hbg5_clear</item>
+        <item name="v5BackgroundRadius">4dp</item>
+        <item name="v5BackgroundBorderSize">1dp</item>
+        <item name="v5BackgroundBorderColor">@color/hbg5_silver</item>
+        <item name="v5BackgroundBorderColorChecked">@color/hbg5_blue</item>
+        <item name="v5BackgroundBorderColorUnable">@null</item>
+
+        <item name="v5TextSize">@dimen/hbg5_text_size_normal</item>
+        <item name="v5TextColor">@color/hbg5_dark</item>
+        <item name="v5TextColorChecked">@color/hbg5_black</item>
+        <item name="v5TextColorUnable">@color/hbg5_gray</item>
+        <item name="v5TextAlignmentVertical">center</item>
+        <item name="v5TextAlignmentHorizontal">start</item>
+
+        <item name="v5PaddingStart">4dp</item>
+        <item name="v5PaddingEnd">4dp</item>
+        <item name="v5PaddingTop">8dp</item>
+        <item name="v5PaddingBottom">8dp</item>
+    </style>
+
+    <style name="HBG5.Theme.Base.TextEditor" parent="HBG5.Theme.Base.TextInput">
+        <item name="android:maxLines">@null</item>
+        <item name="android:inputType">textMultiLine</item>
+    </style>
+
+    <!-- Alert -->
+    <style name="HBG5.Theme.Base.AlertButton" parent="HBG5.Theme.Base.Button">
+        <item name="v5PaddingTop">12dp</item>
+        <item name="v5PaddingBottom">12dp</item>
+        <item name="v5BackgroundColor">@null</item>
+        <item name="v5BackgroundColorPressed">@null</item>
+
+        <item name="v5TextColor">@color/hbg5_blue</item>
+        <item name="v5TextColorPressed">@color/hbg5_blue_dark</item>
+    </style>
+
+    <style name="HBG5.Theme.Base.AlertContentLayout">
+        <item name="v5BackgroundRadius">8dp</item>
+        <item name="v5BackgroundColor">#FFF1F1F1</item>
+
+        <item name="v5DividerSize">1dp</item>
+        <item name="v5DividerColor">@color/hbg5_silver</item>
+    </style>
+
+    <style name="HBG5.Theme.Base.AlertTitleView" parent="HBG5.Theme.Base.TextView">
+
+        <item name="v5TextSize">@dimen/hbg5_text_size_large</item>
+        <item name="v5TextColor">#000</item>
+        <item name="v5TextAlignmentVertical">center</item>
+        <item name="v5TextAlignmentHorizontal">center</item>
+
+        <item name="v5BackgroundColor">#FFF1F1F1</item>
+        <item name="v5BackgroundRadiusLT">8dp</item>
+        <item name="v5BackgroundRadiusRT">8dp</item>
+
+        <item name="v5PaddingStart">4dp</item>
+        <item name="v5PaddingEnd">4dp</item>
+        <item name="v5PaddingTop">8dp</item>
+        <item name="v5PaddingBottom">8dp</item>
+    </style>
+
+    <style name="HBG5.Theme.Base.AlertTextView" parent="HBG5.Theme.Base.TextView">
+        <item name="v5PaddingStart">8dp</item>
+        <item name="v5PaddingEnd">8dp</item>
+        <item name="v5PaddingTop">12dp</item>
+        <item name="v5PaddingBottom">12dp</item>
+    </style>
+
+    <style name="HBG5.Theme.Base.AlertTextInput" parent="HBG5.Theme.Base.TextInput"/>
+    <style name="HBG5.Theme.Base.AlertTextEditor" parent="HBG5.Theme.Base.TextEditor"/>
+
+    <!-- Picker -->
+    <style name="HBG5.Theme.Base.DatePicker">
+        <!--今日顏色(未選取)/日期選取背景色/標題背景色-->
+        <item name="colorSecondary">@color/hbg5_dark</item>
+        <!--月份/日期文字顏色-->
+        <item name="android:textColorPrimary">@color/hbg5_black</item>
+        <!--星期文字顏色-->
+        <item name="android:textColorSecondary">@color/hbg5_black</item>
+        <!--選擇的月份/日期文字顏色-->
+        <item name="android:textColorPrimaryInverse">@color/hbg5_white</item>
+        <!--選擇的年份顏色-->
+        <item name="android:textColorSecondaryInverse">@color/hbg5_gray</item>
+    </style>
+
+    <style name="HBG5.Theme.Base.TimePicker">
+        <!--背景與按鈕色調-->
+        <item name="colorSecondary">@color/hbg5_dark</item>
+        <!--選取的文字顏色-->
+        <item name="android:textColorPrimaryInverse">@color/hbg5_white</item>
+        <!--未選擇的文字顏色-->
+        <item name="android:textColorSecondaryInverse">@color/hbg5_gray</item>
+    </style>
+
+    <!-- Switch -->
+    <style name="HBG5.Theme.Base.Parent.Switch" parent="HBG5.Theme">
+        <item name="v5BackgroundRadius">6dp</item>
+        <item name="v5BackgroundColor">@color/hbg5_silver</item>
+        <item name="v5Padding">2dp</item>
+        <item name="v5TextSize">@dimen/hbg5_text_size_small</item>
+        <item name="v5ButtonStyle">@style/HBG5.Theme.Base.Switch</item>
+    </style>
+    <style name="HBG5.Theme.Base.Switch" parent="HBG5.Theme.Base.RadioButton">
+        <item name="v5TextColor">@color/hbg5_iron</item>
+        <item name="v5TextColorPressed">@null</item>
+        <item name="v5TextColorChecked">@color/hbg5_black</item>
+        <item name="v5TextColorUnable">@color/hbg5_gray</item>
+
+        <item name="v5BackgroundRadius">4dp</item>
+        <item name="v5BackgroundColor">@color/hbg5_clear</item>
+        <item name="v5BackgroundColorPressed">@null</item>
+        <item name="v5BackgroundColorChecked">@color/hbg5_white</item>
+        <item name="v5BackgroundColorUnable">@null</item>
+
+        <item name="v5Padding">@null</item>
+        <item name="v5PaddingStart">2dp</item>
+        <item name="v5PaddingEnd">2dp</item>
+        <item name="v5PaddingTop">8dp</item>
+        <item name="v5PaddingBottom">8dp</item>
+    </style>
+
+    <style name="HBG5.Theme.Base.Parent.Tab" parent="HBG5.Theme">
+        <item name="v5BackgroundRadius">@null</item>
+        <item name="v5BackgroundColor">@null</item>
+        <item name="v5Padding">@null</item>
+        <item name="v5ButtonStyle">@style/HBG5.Theme.Base.Tab</item>
+    </style>
+    <style name="HBG5.Theme.Base.Tab" parent="HBG5.Theme.Base.RadioButton">
+        <item name="v5TextColor">@color/hbg5_black</item>
+        <item name="v5TextColorPressed">@null</item>
+        <item name="v5TextColorChecked">@color/hbg5_black</item>
+        <item name="v5TextColorUnable">@color/hbg5_gray</item>
+
+        <item name="v5BackgroundRadius">@null</item>
+        <item name="v5BackgroundRadiusLT">4dp</item>
+        <item name="v5BackgroundRadiusRT">4dp</item>
+        <item name="v5BackgroundRadiusLB">0dp</item>
+        <item name="v5BackgroundRadiusRB">0dp</item>
+        <item name="v5BackgroundColor">@color/hbg5_clear</item>
+        <item name="v5BackgroundColorPressed">@null</item>
+        <item name="v5BackgroundColorChecked">@color/hbg5_white</item>
+        <item name="v5BackgroundColorUnable">@null</item>
+
+        <item name="v5Padding">@null</item>
+        <item name="v5PaddingStart">12dp</item>
+        <item name="v5PaddingEnd">12dp</item>
+        <item name="v5PaddingTop">8dp</item>
+        <item name="v5PaddingBottom">8dp</item>
+    </style>
+
+</resources>

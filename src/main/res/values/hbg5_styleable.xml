@@ -1,0 +1,562 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ================================================ View START -->
+    <declare-styleable name="HBG5View">
+        <!-- Base -->
+        <attr name="v5Visibility"/>
+        <attr name="v5Touchable"/>
+
+        <attr name="v5Padding"/>
+        <attr name="v5PaddingStart"/>
+        <attr name="v5PaddingEnd"/>
+        <attr name="v5PaddingTop"/>
+        <attr name="v5PaddingBottom"/>
+
+        <!-- Background -->
+        <attr name="v5BackgroundRadius"/>
+        <attr name="v5BackgroundRadiusLT"/>
+        <attr name="v5BackgroundRadiusRT"/>
+        <attr name="v5BackgroundRadiusLB"/>
+        <attr name="v5BackgroundRadiusRB"/>
+        <attr name="v5BackgroundImage"/>
+        <attr name="v5BackgroundColor"/>
+        <attr name="v5BackgroundColorPressed"/>
+        <attr name="v5BackgroundColorChecked"/>
+        <attr name="v5BackgroundColorUnable"/>
+        <attr name="v5BackgroundBorderSize"/>
+        <attr name="v5BackgroundBorderColor"/>
+        <attr name="v5BackgroundBorderColorPressed"/>
+        <attr name="v5BackgroundBorderColorChecked"/>
+        <attr name="v5BackgroundBorderColorUnable"/>
+    </declare-styleable>
+    <!-- ================================================ View End -->
+
+
+    <!-- ================================================ Layout START -->
+    <!-- FrameLayout -->
+    <attr name="hbg5FrameLayoutStyle" format="reference"/>
+    <declare-styleable name="HBG5FrameLayout">
+        <!-- Base -->
+        <attr name="v5Visibility"/>
+        <attr name="v5Touchable"/>
+
+        <attr name="v5Padding"/>
+        <attr name="v5PaddingStart"/>
+        <attr name="v5PaddingEnd"/>
+        <attr name="v5PaddingTop"/>
+        <attr name="v5PaddingBottom"/>
+
+        <!-- Background -->
+        <attr name="v5BackgroundRadius"/>
+        <attr name="v5BackgroundRadiusLT"/>
+        <attr name="v5BackgroundRadiusRT"/>
+        <attr name="v5BackgroundRadiusLB"/>
+        <attr name="v5BackgroundRadiusRB"/>
+        <attr name="v5BackgroundImage"/>
+        <attr name="v5BackgroundColor"/>
+        <attr name="v5BackgroundColorPressed"/>
+        <attr name="v5BackgroundColorChecked"/>
+        <attr name="v5BackgroundColorUnable"/>
+        <attr name="v5BackgroundBorderSize"/>
+        <attr name="v5BackgroundBorderColor"/>
+        <attr name="v5BackgroundBorderColorPressed"/>
+        <attr name="v5BackgroundBorderColorChecked"/>
+        <attr name="v5BackgroundBorderColorUnable"/>
+
+        <!-- State -->
+        <attr name="v5Checked"/>
+        <attr name="v5Checkable"/>
+
+        <!-- Custom -->
+        <attr name="v5Scale"/>
+
+    </declare-styleable>
+    <!-- LinearLayout -->
+    <attr name="hbg5LinearLayoutStyle" format="reference"/>
+    <declare-styleable name="HBG5LinearLayout">
+        <!-- Base -->
+        <attr name="v5Visibility"/>
+        <attr name="v5Touchable"/>
+
+        <attr name="v5Padding"/>
+        <attr name="v5PaddingStart"/>
+        <attr name="v5PaddingEnd"/>
+        <attr name="v5PaddingTop"/>
+        <attr name="v5PaddingBottom"/>
+
+        <!-- Background -->
+        <attr name="v5BackgroundRadius"/>
+        <attr name="v5BackgroundRadiusLT"/>
+        <attr name="v5BackgroundRadiusRT"/>
+        <attr name="v5BackgroundRadiusLB"/>
+        <attr name="v5BackgroundRadiusRB"/>
+        <attr name="v5BackgroundImage"/>
+        <attr name="v5BackgroundColor"/>
+        <attr name="v5BackgroundColorPressed"/>
+        <attr name="v5BackgroundColorChecked"/>
+        <attr name="v5BackgroundColorUnable"/>
+        <attr name="v5BackgroundBorderSize"/>
+        <attr name="v5BackgroundBorderColor"/>
+        <attr name="v5BackgroundBorderColorPressed"/>
+        <attr name="v5BackgroundBorderColorChecked"/>
+        <attr name="v5BackgroundBorderColorUnable"/>
+
+        <!-- Custom -->
+        <attr name="v5DividerSize"/>
+        <attr name="v5DividerColor"/>
+    </declare-styleable>
+    <!-- ScrollLayout -->
+    <attr name="hbg5ScrollLayoutStyle" format="reference"/>
+    <declare-styleable name="HBG5ScrollLayout">
+        <!-- Base -->
+        <attr name="v5Visibility"/>
+        <attr name="v5Touchable"/>
+
+        <attr name="v5Padding"/>
+        <attr name="v5PaddingStart"/>
+        <attr name="v5PaddingEnd"/>
+        <attr name="v5PaddingTop"/>
+        <attr name="v5PaddingBottom"/>
+
+        <!-- Background -->
+        <attr name="v5BackgroundRadius"/>
+        <attr name="v5BackgroundRadiusLT"/>
+        <attr name="v5BackgroundRadiusRT"/>
+        <attr name="v5BackgroundRadiusLB"/>
+        <attr name="v5BackgroundRadiusRB"/>
+        <attr name="v5BackgroundImage"/>
+        <attr name="v5BackgroundColor"/>
+        <attr name="v5BackgroundColorPressed"/>
+        <attr name="v5BackgroundColorChecked"/>
+        <attr name="v5BackgroundColorUnable"/>
+        <attr name="v5BackgroundBorderSize"/>
+        <attr name="v5BackgroundBorderColor"/>
+        <attr name="v5BackgroundBorderColorPressed"/>
+        <attr name="v5BackgroundBorderColorChecked"/>
+        <attr name="v5BackgroundBorderColorUnable"/>
+
+        <!-- Custom -->
+    </declare-styleable>
+    <!-- GridLayout -->
+    <attr name="hbg5GridLayoutStyle" format="reference"/>
+    <declare-styleable name="HBG5GridLayout">
+        <!-- Base -->
+        <attr name="v5Visibility"/>
+        <attr name="v5Touchable"/>
+
+        <attr name="v5Padding"/>
+        <attr name="v5PaddingStart"/>
+        <attr name="v5PaddingEnd"/>
+        <attr name="v5PaddingTop"/>
+        <attr name="v5PaddingBottom"/>
+
+        <!-- Background -->
+        <attr name="v5BackgroundRadius"/>
+        <attr name="v5BackgroundRadiusLT"/>
+        <attr name="v5BackgroundRadiusRT"/>
+        <attr name="v5BackgroundRadiusLB"/>
+        <attr name="v5BackgroundRadiusRB"/>
+        <attr name="v5BackgroundImage"/>
+        <attr name="v5BackgroundColor"/>
+        <attr name="v5BackgroundColorPressed"/>
+        <attr name="v5BackgroundColorChecked"/>
+        <attr name="v5BackgroundColorUnable"/>
+        <attr name="v5BackgroundBorderSize"/>
+        <attr name="v5BackgroundBorderColor"/>
+        <attr name="v5BackgroundBorderColorPressed"/>
+        <attr name="v5BackgroundBorderColorChecked"/>
+        <attr name="v5BackgroundBorderColorUnable"/>
+
+        <!-- Custom -->
+    </declare-styleable>
+    <!-- TabGroupLayout -->
+    <attr name="hbg5TabLayoutStyle" format="reference"/>
+    <declare-styleable name="HBG5TabLayout">
+        <!-- Custom -->
+        <attr name="v5TabIndex"/>
+        <attr name="v5TabLineBackgroundColor"/>
+        <attr name="v5TabLineColors"/>
+    </declare-styleable>
+    <!-- WrapLayout -->
+    <declare-styleable name="HBG5WrapLayout">
+        <attr name="android:gravity"/>
+    </declare-styleable>
+
+    <!-- ================================================ Layout END -->
+
+    <!-- ================================================ Image START -->
+    <!-- ImageView -->
+    <attr name="hbg5ImageViewStyle" format="reference"/>
+    <declare-styleable name="HBG5ImageView">
+        <!-- Base -->
+        <attr name="v5Visibility"/>
+        <attr name="v5Touchable"/>
+
+        <attr name="v5Padding"/>
+        <attr name="v5PaddingStart"/>
+        <attr name="v5PaddingEnd"/>
+        <attr name="v5PaddingTop"/>
+        <attr name="v5PaddingBottom"/>
+
+        <!-- Background -->
+        <attr name="v5BackgroundRadius"/>
+        <attr name="v5BackgroundRadiusLT"/>
+        <attr name="v5BackgroundRadiusRT"/>
+        <attr name="v5BackgroundRadiusLB"/>
+        <attr name="v5BackgroundRadiusRB"/>
+        <attr name="v5BackgroundImage"/>
+        <attr name="v5BackgroundColor"/>
+        <attr name="v5BackgroundColorPressed"/>
+        <attr name="v5BackgroundColorChecked"/>
+        <attr name="v5BackgroundColorUnable"/>
+        <attr name="v5BackgroundBorderSize"/>
+        <attr name="v5BackgroundBorderColor"/>
+        <attr name="v5BackgroundBorderColorPressed"/>
+        <attr name="v5BackgroundBorderColorChecked"/>
+        <attr name="v5BackgroundBorderColorUnable"/>
+
+        <!-- Custom -->
+        <attr name="v5ImageScaleType"/>
+        <attr name="v5ImageTint"/>
+        <attr name="v5ImageTintPressed"/>
+        <attr name="v5ImageTintChecked"/>
+        <attr name="v5ImageTintUnable"/>
+        <attr name="v5Image"/>
+        <attr name="v5ImagePressed"/>
+        <attr name="v5ImageChecked"/>
+        <attr name="v5ImageUnable"/>
+    </declare-styleable>
+
+    <!-- ImageButton -->
+    <attr name="hbg5ImageButtonStyle" format="reference"/>
+    <declare-styleable name="HBG5ImageButton">
+
+        <!-- State -->
+        <attr name="v5Checked"/>
+        <attr name="v5Checkable"/>
+
+        <!-- Image -->
+        <attr name="v5ImageTintPressed"/>
+        <attr name="v5ImagePressed"/>
+        <attr name="v5ImageTintChecked"/>
+        <attr name="v5ImageChecked"/>
+
+    </declare-styleable>
+
+    <!-- ================================================ Image END -->
+
+
+    <!-- ================================================ Text START -->
+    <!-- TextView -->
+    <attr name="hbg5TextViewStyle" format="reference"/>
+    <declare-styleable name="HBG5TextView">
+        <!-- Base -->
+        <attr name="v5Visibility"/>
+        <attr name="v5Touchable"/>
+
+        <attr name="v5Padding"/>
+        <attr name="v5PaddingStart"/>
+        <attr name="v5PaddingEnd"/>
+        <attr name="v5PaddingTop"/>
+        <attr name="v5PaddingBottom"/>
+
+        <!-- Background -->
+        <attr name="v5BackgroundRadius"/>
+        <attr name="v5BackgroundRadiusLT"/>
+        <attr name="v5BackgroundRadiusRT"/>
+        <attr name="v5BackgroundRadiusLB"/>
+        <attr name="v5BackgroundRadiusRB"/>
+        <attr name="v5BackgroundImage"/>
+        <attr name="v5BackgroundColor"/>
+        <attr name="v5BackgroundColorPressed"/>
+        <attr name="v5BackgroundColorChecked"/>
+        <attr name="v5BackgroundColorUnable"/>
+        <attr name="v5BackgroundBorderSize"/>
+        <attr name="v5BackgroundBorderColor"/>
+        <attr name="v5BackgroundBorderColorPressed"/>
+        <attr name="v5BackgroundBorderColorChecked"/>
+        <attr name="v5BackgroundBorderColorUnable"/>
+
+        <!-- State -->
+        <attr name="v5Checked"/>
+        <attr name="v5Checkable"/>
+
+        <!-- Custom -->
+        <attr name="v5Text"/>
+        <attr name="v5TextChecked"/>
+        <attr name="v5TextSize"/>
+        <attr name="v5TextColor"/>
+        <attr name="v5TextColorPressed"/>
+        <attr name="v5TextColorChecked"/>
+        <attr name="v5TextColorUnable"/>
+        <attr name="v5TextAlignmentVertical"/>
+        <attr name="v5TextAlignmentHorizontal"/>
+
+        <attr name="v5Hint"/>
+        <attr name="v5HintColor"/>
+
+    </declare-styleable>
+    <!-- TextInput -->
+    <attr name="hbg5TextInputStyle" format="reference"/>
+    <declare-styleable name="HBG5TextInput">
+        <!-- Base -->
+        <attr name="v5Visibility"/>
+        <attr name="v5Touchable"/>
+
+        <attr name="v5Padding"/>
+        <attr name="v5PaddingStart"/>
+        <attr name="v5PaddingEnd"/>
+        <attr name="v5PaddingTop"/>
+        <attr name="v5PaddingBottom"/>
+
+        <!-- Background -->
+        <attr name="v5BackgroundRadius"/>
+        <attr name="v5BackgroundRadiusLT"/>
+        <attr name="v5BackgroundRadiusRT"/>
+        <attr name="v5BackgroundRadiusLB"/>
+        <attr name="v5BackgroundRadiusRB"/>
+        <attr name="v5BackgroundImage"/>
+        <attr name="v5BackgroundColor"/>
+        <attr name="v5BackgroundColorPressed"/>
+        <attr name="v5BackgroundColorChecked"/>
+        <attr name="v5BackgroundColorUnable"/>
+        <attr name="v5BackgroundBorderSize"/>
+        <attr name="v5BackgroundBorderColor"/>
+        <attr name="v5BackgroundBorderColorPressed"/>
+        <attr name="v5BackgroundBorderColorChecked"/>
+        <attr name="v5BackgroundBorderColorUnable"/>
+
+        <!-- Custom -->
+        <attr name="v5Text"/>
+        <attr name="v5TextSize"/>
+        <attr name="v5TextColor"/>
+        <attr name="v5TextColorPressed"/>
+        <attr name="v5TextColorChecked"/>
+        <attr name="v5TextColorUnable"/>
+        <attr name="v5TextAlignmentVertical"/>
+        <attr name="v5TextAlignmentHorizontal"/>
+
+        <attr name="v5Hint"/>
+        <attr name="v5HintColor"/>
+
+        <attr name="v5TextInputType"/>
+        <attr name="v5TextInputSecurityEnable"/>
+
+    </declare-styleable>
+    <!-- TextEditor -->
+    <attr name="hbg5TextEditorStyle" format="reference"/>
+    <declare-styleable name="HBG5TextEditor">
+        <!-- Base -->
+        <attr name="v5Visibility"/>
+        <attr name="v5Touchable"/>
+
+        <attr name="v5Padding"/>
+        <attr name="v5PaddingStart"/>
+        <attr name="v5PaddingEnd"/>
+        <attr name="v5PaddingTop"/>
+        <attr name="v5PaddingBottom"/>
+
+        <!-- Background -->
+        <attr name="v5BackgroundRadius"/>
+        <attr name="v5BackgroundRadiusLT"/>
+        <attr name="v5BackgroundRadiusRT"/>
+        <attr name="v5BackgroundRadiusLB"/>
+        <attr name="v5BackgroundRadiusRB"/>
+        <attr name="v5BackgroundImage"/>
+        <attr name="v5BackgroundColor"/>
+        <attr name="v5BackgroundColorPressed"/>
+        <attr name="v5BackgroundColorChecked"/>
+        <attr name="v5BackgroundColorUnable"/>
+        <attr name="v5BackgroundBorderSize"/>
+        <attr name="v5BackgroundBorderColor"/>
+        <attr name="v5BackgroundBorderColorPressed"/>
+        <attr name="v5BackgroundBorderColorChecked"/>
+        <attr name="v5BackgroundBorderColorUnable"/>
+
+        <!-- Custom -->
+        <attr name="v5Text"/>
+        <attr name="v5TextSize"/>
+        <attr name="v5TextColor"/>
+        <attr name="v5TextColorPressed"/>
+        <attr name="v5TextColorChecked"/>
+        <attr name="v5TextColorUnable"/>
+        <attr name="v5TextAlignmentVertical"/>
+        <attr name="v5TextAlignmentHorizontal"/>
+
+        <attr name="v5Hint"/>
+        <attr name="v5HintColor"/>
+    </declare-styleable>
+    <!-- ================================================ Text END -->
+
+
+    <!-- ================================================ Button START -->
+    <!-- Button -->
+    <attr name="hbg5ButtonStyle" format="reference"/>
+    <declare-styleable name="HBG5Button">
+
+        <!-- Image -->
+        <attr name="v5Images"/>
+
+        <attr name="v5Image"/>
+        <attr name="v5ImagePressed"/>
+        <attr name="v5ImageChecked"/>
+
+        <attr name="v5ImageAlignment"/>
+
+        <attr name="v5ImageWidth"/>
+        <attr name="v5ImageHeight"/>
+
+        <attr name="v5ImagePadding"/>
+
+    </declare-styleable>
+    <!-- CheckButton -->
+    <attr name="hbg5CheckButtonStyle" format="reference"/>
+    <declare-styleable name="HBG5CheckButton"/>
+    <!-- RadioButton -->
+    <attr name="hbg5RadioButtonStyle" format="reference"/>
+    <declare-styleable name="HBG5RadioButton"/>
+    <!-- ================================================ Button END -->
+
+
+    <!-- ================================================ List START -->
+    <!-- ListView -->
+    <attr name="hbg5ListViewStyle" format="reference"/>
+    <declare-styleable name="HBG5ListView">
+        <!-- Base -->
+        <attr name="v5Visibility"/>
+        <attr name="v5Touchable"/>
+
+        <attr name="v5Padding"/>
+        <attr name="v5PaddingStart"/>
+        <attr name="v5PaddingEnd"/>
+        <attr name="v5PaddingTop"/>
+        <attr name="v5PaddingBottom"/>
+
+        <!-- Background -->
+        <attr name="v5BackgroundRadius"/>
+        <attr name="v5BackgroundRadiusLT"/>
+        <attr name="v5BackgroundRadiusRT"/>
+        <attr name="v5BackgroundRadiusLB"/>
+        <attr name="v5BackgroundRadiusRB"/>
+        <attr name="v5BackgroundImage"/>
+        <attr name="v5BackgroundColor"/>
+        <attr name="v5BackgroundColorPressed"/>
+        <attr name="v5BackgroundColorChecked"/>
+        <attr name="v5BackgroundColorUnable"/>
+        <attr name="v5BackgroundBorderSize"/>
+        <attr name="v5BackgroundBorderColor"/>
+        <attr name="v5BackgroundBorderColorPressed"/>
+        <attr name="v5BackgroundBorderColorChecked"/>
+        <attr name="v5BackgroundBorderColorUnable"/>
+
+        <!-- Custom -->
+        <attr name="v5ListOrientation"/>
+        <attr name="v5ListLayoutType"/>
+        <attr name="v5ListSpanCount"/>
+
+        <attr name="v5ListDividerStartSize"/>
+        <attr name="v5ListDividerMidSize"/>
+        <attr name="v5ListDividerEndSize"/>
+        <attr name="v5ListDividerColor"/>
+
+        <attr name="v5ListDividerGravity"/>
+
+        <attr name="v5ListHint"/>
+        <attr name="v5ListHintColor"/>
+        <attr name="v5ListHintSize"/>
+
+        <attr name="v5ListAnimationEnable"/>
+
+        <attr name="android:maxHeight"/>
+    </declare-styleable>
+    <!-- PageView -->
+    <attr name="hbg5PageViewStyle" format="reference"/>
+    <declare-styleable name="HBG5PageView">
+        <!-- Base -->
+        <attr name="v5Visibility"/>
+        <attr name="v5Touchable"/>
+
+        <attr name="v5Padding"/>
+        <attr name="v5PaddingStart"/>
+        <attr name="v5PaddingEnd"/>
+        <attr name="v5PaddingTop"/>
+        <attr name="v5PaddingBottom"/>
+
+        <!-- Background -->
+        <attr name="v5BackgroundRadius"/>
+        <attr name="v5BackgroundRadiusLT"/>
+        <attr name="v5BackgroundRadiusRT"/>
+        <attr name="v5BackgroundRadiusLB"/>
+        <attr name="v5BackgroundRadiusRB"/>
+        <attr name="v5BackgroundImage"/>
+        <attr name="v5BackgroundColor"/>
+        <attr name="v5BackgroundColorPressed"/>
+        <attr name="v5BackgroundColorChecked"/>
+        <attr name="v5BackgroundColorUnable"/>
+        <attr name="v5BackgroundBorderSize"/>
+        <attr name="v5BackgroundBorderColor"/>
+        <attr name="v5BackgroundBorderColorPressed"/>
+        <attr name="v5BackgroundBorderColorChecked"/>
+        <attr name="v5BackgroundBorderColorUnable"/>
+
+        <!-- Custom -->
+        <attr name="v5ListOrientation"/>
+
+    </declare-styleable>
+    <!-- Banner -->
+    <attr name="hbg5BannerStyle" format="reference"/>
+    <declare-styleable name="HBG5Banner">
+        <!-- Base -->
+        <attr name="v5Visibility"/>
+        <attr name="v5Touchable"/>
+
+        <attr name="v5Padding"/>
+        <attr name="v5PaddingStart"/>
+        <attr name="v5PaddingEnd"/>
+        <attr name="v5PaddingTop"/>
+        <attr name="v5PaddingBottom"/>
+
+        <!-- Background -->
+        <attr name="v5BackgroundRadius"/>
+        <attr name="v5BackgroundRadiusLT"/>
+        <attr name="v5BackgroundRadiusRT"/>
+        <attr name="v5BackgroundRadiusLB"/>
+        <attr name="v5BackgroundRadiusRB"/>
+        <attr name="v5BackgroundImage"/>
+        <attr name="v5BackgroundColor"/>
+        <attr name="v5BackgroundColorPressed"/>
+        <attr name="v5BackgroundColorChecked"/>
+        <attr name="v5BackgroundColorUnable"/>
+        <attr name="v5BackgroundBorderSize"/>
+        <attr name="v5BackgroundBorderColor"/>
+        <attr name="v5BackgroundBorderColorPressed"/>
+        <attr name="v5BackgroundBorderColorChecked"/>
+        <attr name="v5BackgroundBorderColorUnable"/>
+
+        <!-- Custom -->
+        <attr name="v5ListOrientation"/>
+
+        <attr name="v5ImageScaleType"/>
+        <attr name="v5ImageLoading"/>
+        <attr name="v5ImageFailed"/>
+
+    </declare-styleable>
+    <!-- ================================================ List END -->
+
+    <!-- ================================================ HBG5Switch START -->
+    <declare-styleable name="HBG5Switch">
+        <attr name="android:enabled"/>
+        <attr name="checkedIndex" format="integer"/>
+        <attr name="options" format="string"/>
+        <attr name="v5TextSize"/>
+        <attr name="v5ButtonStyle"/>
+        <attr name="v5BaseLineColor" format="color"/>
+        <attr name="v5BaseLineGravity" format="enum">
+            <enum name="top" value="0"/>
+            <enum name="bottom" value="1"/>
+        </attr>
+    </declare-styleable>
+    <!-- ================================================ HBG5Switch END -->
+
+</resources>

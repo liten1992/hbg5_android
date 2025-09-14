@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hbg5_widget_n_running">執行中</string>
+    <string name="hbg5_widget_n_biometrics">生物辨識</string>
+</resources>

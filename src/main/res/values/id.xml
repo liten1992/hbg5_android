@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="layout_parent" type="id"/>
+    <item name="layout_content" type="id"/>
+    <item name="layout_child" type="id"/>
+    <item name="layout_tab" type="id"/>
+    <item name="holder" type="id"/>
+    <item name="index" type="id"/>
+
+    <item name="attr_image" type="id"/>
+    <item name="attr_image_normal" type="id"/>
+    <item name="attr_image_pressed" type="id"/>
+    <item name="attr_image_checked" type="id"/>
+    <item name="attr_image_unable" type="id"/>
+
+    <item name="attr_image_list" type="id"/>
+    <item name="attr_image_loading" type="id"/>
+    <item name="attr_image_failed" type="id"/>
+
+    <item name="attr_image_tint_normal" type="id"/>
+    <item name="attr_image_tint_pressed" type="id"/>
+    <item name="attr_image_tint_checked" type="id"/>
+    <item name="attr_image_tint_unable" type="id"/>
+
+    <item name="attr_image_width" type="id"/>
+    <item name="attr_image_height" type="id"/>
+
+    <item name="attr_image_alignment" type="id"/>
+    <item name="attr_image_scale_type" type="id"/>
+
+    <item name="attr_div_size" type="id"/>
+    <item name="attr_div_size_start" type="id"/>
+    <item name="attr_div_size_mid" type="id"/>
+    <item name="attr_div_size_end" type="id"/>
+    <item name="attr_div_color" type="id"/>
+    <item name="attr_div_gravity" type="id"/>
+
+    <item name="attr_tab_index" type="id"/>
+    <item name="attr_tab_line_background_color" type="id"/>
+    <item name="attr_tab_line_colors_checked" type="id"/>
+
+    <item name="attr_color_normal" type="id"/>
+    <item name="attr_color_pressed" type="id"/>
+    <item name="attr_color_checked" type="id"/>
+    <item name="attr_color_unable" type="id"/>
+
+    <item name="attr_color_border_normal" type="id"/>
+    <item name="attr_color_border_pressed" type="id"/>
+    <item name="attr_color_border_checked" type="id"/>
+    <item name="attr_color_border_unable" type="id"/>
+
+    <item name="attr_color_text_normal" type="id"/>
+    <item name="attr_color_text_pressed" type="id"/>
+    <item name="attr_color_text_checked" type="id"/>
+    <item name="attr_color_text_unable" type="id"/>
+
+    <item name="attr_text_normal" type="id"/>
+    <item name="attr_text_checked" type="id"/>
+    <item name="attr_text_watcher" type="id"/>
+
+    <item name="attr_hint" type="id"/>
+    <item name="attr_hint_size" type="id"/>
+    <item name="attr_hint_color" type="id"/>
+
+    <item name="attr_input_security" type="id"/>
+    <item name="attr_input_type" type="id"/>
+
+    <item name="attr_list_adapter" type="id"/>
+    <item name="attr_list_orientation" type="id"/>
+    <item name="attr_list_span_count" type="id"/>
+    <item name="attr_list_layout_type" type="id"/>
+
+    <item name="attr_size_radius" type="id"/>
+    <item name="attr_size_radius_rect" type="id"/>
+    <item name="attr_size_border" type="id"/>
+
+    <item name="attr_checked" type="id"/>
+    <item name="attr_checked_lock" type="id"/>
+    <item name="attr_checkable" type="id"/>
+    <item name="attr_completed" type="id"/>
+
+    <item name="attr_padding" type="id"/>
+    <item name="attr_padding_start" type="id"/>
+    <item name="attr_padding_end" type="id"/>
+    <item name="attr_padding_top" type="id"/>
+    <item name="attr_padding_bottom" type="id"/>
+
+    <item name="attr_measure_scale" type="id"/>
+
+    <item name="attr_bind_child" type="id"/>
+    <item name="attr_bind_owner" type="id"/>
+
+    <item name="attr_callback_checked_change" type="id"/>
+    <item name="attr_callback_page_change" type="id"/>
+    <item name="attr_callback_page_click" type="id"/>
+    <item name="attr_callback_page_long_click" type="id"/>
+    <item name="attr_callback_scroll_end" type="id"/>
+    <item name="attr_callback_swap" type="id"/>
+
+    <item name="tag_is_scroll_top" type="id"/>
+</resources>

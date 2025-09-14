@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<priv.liten.hbg5_widget.bin.layout.HBG5FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/image_color"
+    android:minHeight="64dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:v5BackgroundBorderSize="1dp"
+    app:v5BackgroundBorderColor="@color/hbg5_silver"
+    app:v5BackgroundRadius="fill"
+    tools:v5BackgroundColor="@color/hbg5_gray">
+
+</priv.liten.hbg5_widget.bin.layout.HBG5FrameLayout>

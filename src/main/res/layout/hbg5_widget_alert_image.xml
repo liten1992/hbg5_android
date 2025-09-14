@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FDDD"
+    tools:parentTag="android.widget.FrameLayout">
+
+    <FrameLayout
+        android:id="@+id/layout_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:focusable="true">
+
+
+        <!-- 圖像 -->
+        <priv.liten.hbg5_widget.bin.image.HBG5ImageView
+            android:id="@+id/image_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="false"
+            android:focusable="false"
+            app:v5ImageScaleType="fit" />
+
+        <!-- 返回 -->
+        <priv.liten.hbg5_widget.bin.image.HBG5ImageButton
+            android:id="@+id/button_back"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_gravity="start|top"
+            app:v5PaddingTop="12dp"
+            app:v5PaddingBottom="12dp"
+            app:v5PaddingStart="12dp"
+            app:v5PaddingEnd="12dp"
+            app:v5BackgroundRadius="@null"
+            app:v5BackgroundRadiusRB="16dp"
+            app:v5BackgroundColor="#6000"
+            app:v5BackgroundColorPressed="#8000"
+            app:v5Image="@drawable/hbg5_dark_ic_close"
+            app:v5Touchable="true"
+            app:v5Checkable="false"/>
+
+        <!-- 返回 -->
+        <priv.liten.hbg5_widget.bin.layout.HBG5LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|top"
+            android:layout_marginEnd="4dp"
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal"
+            app:v5DividerSize="16dp">
+
+
+            <priv.liten.hbg5_widget.bin.image.HBG5ImageButton
+                android:id="@+id/button_priv"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                app:v5Padding="0dp"
+                app:v5PaddingStart="0dp"
+                app:v5PaddingEnd="4dp"
+                app:v5PaddingTop="2dp"
+                app:v5PaddingBottom="2dp"
+                app:v5BackgroundRadius="fill"
+                app:v5BackgroundColor="#6000"
+                app:v5BackgroundColorPressed="#8000"
+                app:v5Image="@drawable/hbg5_dark_ic_arrow_left"
+                app:v5Touchable="true"
+                app:v5Checkable="false"/>
+
+            <!-- 頁碼 -->
+            <priv.liten.hbg5_widget.bin.text.HBG5TextView
+                style="@style/HBG5.Theme.Base.TextView"
+                android:id="@+id/text_page"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:minWidth="90dp"
+                app:v5Padding="12dp"
+                app:v5Touchable="false"
+                app:v5BackgroundColor="#6000"
+                app:v5BackgroundRadius="8dp"
+                app:v5Text="0 / 0"
+                app:v5TextSize="@dimen/hbg5_text_size_normal"
+                app:v5TextColor="#fff"
+                app:v5TextAlignmentHorizontal="center"
+                app:v5TextAlignmentVertical="center"/>
+
+            <!-- 下一頁 -->
+            <priv.liten.hbg5_widget.bin.image.HBG5ImageButton
+                style="@style/HBG5.Theme.Base.AlertButton"
+                android:id="@+id/button_next"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                app:v5Padding="0dp"
+                app:v5PaddingStart="4dp"
+                app:v5PaddingEnd="0dp"
+                app:v5PaddingTop="2dp"
+                app:v5PaddingBottom="2dp"
+                app:v5BackgroundRadius="fill"
+                app:v5BackgroundColor="#6000"
+                app:v5BackgroundColorPressed="#8000"
+                app:v5Image="@drawable/hbg5_dark_ic_arrow_right"
+                app:v5Touchable="true"
+                app:v5Checkable="false"/>
+
+        </priv.liten.hbg5_widget.bin.layout.HBG5LinearLayout>
+
+
+
+    </FrameLayout>
+
+</FrameLayout>

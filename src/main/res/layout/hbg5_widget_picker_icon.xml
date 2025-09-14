@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    tools:parentTag="priv.liten.hbg5_widget.bin.layout.HBG5FrameLayout">
+
+    <priv.liten.hbg5_widget.bin.list.HBG5ListView
+        android:id="@+id/list_icon"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:v5ListSpanCount="3"
+        app:v5ListDividerStartSize="16dp"
+        app:v5ListDividerMidSize="16dp"
+        app:v5ListDividerEndSize="16dp"
+        app:v5ListAnimationEnable="false"
+        app:v5ListOrientation="vertical"
+        app:v5ListLayoutType="grid"
+        tools:itemCount="10"
+        tools:listitem="@layout/hbg5_widget_item_icon_picker"/>
+
+</merge>

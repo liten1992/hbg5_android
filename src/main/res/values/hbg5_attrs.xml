@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ================================================ State START -->
+
+    <!-- ================================================ State END -->
+
+    <!-- ================================================ Style START -->
+    <attr name="v5TitleStyle" format="reference"/>
+    <attr name="v5HeaderStyle" format="reference"/>
+    <attr name="v5ButtonStyle" format="reference"/>
+    <attr name="v5WeekendStyle" format="reference"/>
+    <attr name="v5UnableStyle" format="reference"/>
+    <attr name="v5LastButtonStyle" format="reference"/>
+    <attr name="v5NextButtonStyle" format="reference"/>
+    <!-- ================================================ Style END -->
+
+    <!-- ================================================ Layout START -->
+    <attr name="v5Scale" format="float"/>
+    <!-- ================================================ Layout END -->
+
+    <!-- ================================================ State(通用) START -->
+    <attr name="v5Checked" format="boolean"/>
+    <attr name="v5Checkable" format="boolean"/>
+    <attr name="v5Touchable" format="boolean"/>
+    <attr name="v5Visibility" format="enum">
+        <enum name="gone" value="0"/>
+        <enum name="invisible" value="1"/>
+        <enum name="visible" value="2"/>
+    </attr>
+    <!-- ================================================ State(通用) END -->
+
+    <!-- ================================================ Padding(通用) START -->
+    <attr name="v5Padding" format="dimension"/>
+    <attr name="v5PaddingStart" format="dimension"/>
+    <attr name="v5PaddingEnd" format="dimension"/>
+    <attr name="v5PaddingTop" format="dimension"/>
+    <attr name="v5PaddingBottom" format="dimension"/>
+    <!-- ================================================ Padding(通用) END -->
+
+    <!-- ================================================ Divider(通用) START -->
+    <attr name="v5DividerSize" format="dimension"/>
+    <attr name="v5DividerColor" format="color"/>
+    <!-- ================================================ Divider(通用) END -->
+
+
+    <!-- ================================================ Divider(限制) START -->
+    <attr name="v5WheelItemCount" format="integer"/>
+    <!-- ================================================ Divider(限制) END -->
+
+    <!-- ================================================ Text(通用) START -->
+    <attr name="v5Text" format="string"/>
+    <attr name="v5TextChecked" format="string"/>
+
+    <attr name="v5TextSize" format="dimension"/>
+    <!-- 文字顏色 -->
+    <attr name="v5TextColor" format="color"/>
+    <attr name="v5TextColorPressed" format="color"/>
+    <attr name="v5TextColorChecked" format="color"/>
+    <attr name="v5TextColorUnable" format="color"/>
+    <!-- 文字垂直對齊 -->
+    <attr name="v5TextAlignmentVertical" format="enum">
+        <enum name="top" value="0"/>
+        <enum name="center" value="1"/>
+        <enum name="bottom" value="2"/>
+        <enum name="fill" value="3"/>
+    </attr>
+    <!-- 文字水平對齊 -->
+    <attr name="v5TextAlignmentHorizontal" format="enum">
+        <enum name="start" value="0"/>
+        <enum name="center" value="1"/>
+        <enum name="end" value="2"/>
+        <enum name="fill" value="3"/>
+    </attr>
+
+    <!-- 文字輸入進行安全遮蔽 -->
+    <attr name="v5TextInputSecurityEnable" format="boolean"/>
+    <!-- 文字輸入內容限制 文字、數字 -->
+    <attr name="v5TextInputType" format="enum">
+        <enum name="text" value="0"/>
+        <enum name="number" value="1"/>
+        <enum name="textUppercase" value="2"/>
+    </attr>
+    <!-- ================================================ Text(通用) END -->
+
+    <!-- ================================================ Hint(通用) START -->
+    <attr name="v5Hint" format="string"/>
+    <attr name="v5HintColor" format="color"/>
+    <!-- ================================================ Hint(通用) END -->
+
+    <!-- ================================================ Title START -->
+    <!-- 文字輸入可見性 -->
+    <attr name="v5TitleVisibility" format="enum">
+        <enum name="gone" value="0"/>
+        <enum name="invisible" value="1"/>
+        <enum name="visible" value="2"/>
+    </attr>
+    <!-- ================================================ Title END -->
+
+    <!-- ================================================ Background(通用) START -->
+    <!-- 背景圓角 -->
+    <attr name="v5BackgroundRadius" format="dimension">
+        <enum name="fill" value="-1"/>
+    </attr>
+    <attr name="v5BackgroundRadiusLT" format="dimension">
+        <enum name="fill" value="-1"/>
+    </attr>
+    <attr name="v5BackgroundRadiusRT" format="dimension">
+        <enum name="fill" value="-1"/>
+    </attr>
+    <attr name="v5BackgroundRadiusLB" format="dimension">
+        <enum name="fill" value="-1"/>
+    </attr>
+    <attr name="v5BackgroundRadiusRB" format="dimension">
+        <enum name="fill" value="-1"/>
+    </attr>
+
+    <!-- 背景圖片-預設 -->
+    <attr name="v5BackgroundImage" format="reference"/>
+    <!-- 背景圖片-按下 -->
+    <attr name="v5BackgroundImagePressed" format="reference"/>
+    <!-- 背景圖片-選取 -->
+    <attr name="v5BackgroundImageChecked" format="reference"/>
+
+    <!-- 背景顏色-預設 -->
+    <attr name="v5BackgroundColor" format="color"/>
+    <!-- 背景顏色-按下 -->
+    <attr name="v5BackgroundColorPressed" format="color"/>
+    <!-- 背景顏色-選取 -->
+    <attr name="v5BackgroundColorChecked" format="color"/>
+    <!-- 背景顏色-禁用 -->
+    <attr name="v5BackgroundColorUnable" format="color"/>
+
+    <!-- 背景框線尺寸 -->
+    <attr name="v5BackgroundBorderSize" format="dimension"/>
+
+    <!-- 背景框線顏色-預設 -->
+    <attr name="v5BackgroundBorderColor" format="color"/>
+    <!-- 背景框線顏色-按下 -->
+    <attr name="v5BackgroundBorderColorPressed" format="color"/>
+    <!-- 背景框線顏色-選取 -->
+    <attr name="v5BackgroundBorderColorChecked" format="color"/>
+    <!-- 背景框線顏色-禁用 -->
+    <attr name="v5BackgroundBorderColorUnable" format="color"/>
+
+    <!-- ================================================ Background(通用) END -->
+
+    <!-- ================================================ Image(通用) START -->
+    <attr name="v5Images" format="reference"/>
+    <!-- 圖像 -->
+    <attr name="v5Image" format="reference|color"/>
+    <attr name="v5ImagePressed" format="reference|color"/>
+    <attr name="v5ImageChecked" format="reference|color"/>
+    <attr name="v5ImageUnable" format="reference|color"/>
+
+    <attr name="v5ImageStart" format="reference|color"/>
+    <attr name="v5ImageEnd" format="reference|color"/>
+    <attr name="v5ImageTop" format="reference|color"/>
+    <attr name="v5ImageBottom" format="reference|color"/>
+
+    <!-- 圖像寬度 -->
+    <attr name="v5ImageWidth" format="dimension"/>
+    <!-- 圖像高度 -->
+    <attr name="v5ImageHeight" format="dimension"/>
+    <!-- 圖像顯示位置 start、end、top、bottom -->
+    <attr name="v5ImageAlignment">
+        <enum name="start"              value="0"/>
+        <enum name="end"                value="1"/>
+        <enum name="top"                value="2"/>
+        <enum name="bottom"             value="3"/>
+    </attr>
+    <!-- 圖片填充方式 -->
+    <attr name="v5ImageScaleType" format="enum">
+        <enum name="fill" value="1"/>
+        <enum name="fit" value="2"/>
+        <enum name="crop" value="3"/>
+    </attr>
+    <!-- 圖像內容間距 -->
+    <attr name="v5ImagePadding" format="dimension"/>
+    <!-- 圖片下載中 -->
+    <attr name="v5ImageLoading" format="reference"/>
+    <!-- 圖片下載失敗 -->
+    <attr name="v5ImageFailed" format="reference"/>
+
+
+    <!-- ================================================ Image(通用) END -->
+
+    <!-- ================================================ Image(限制) START -->
+    <!-- 圖片著色 null: 不套用 -->
+    <attr name="v5ImageTint" format="color"/>
+    <attr name="v5ImageTintPressed" format="color"/>
+    <attr name="v5ImageTintChecked" format="color"/>
+    <attr name="v5ImageTintUnable" format="color"/>
+    <!-- ================================================ Image(限制) START -->
+
+
+    <!-- ================================================ ListView(通用) START -->
+    <!-- 列表滾動方向 垂直(vertical) 水平(horizontal) -->
+    <attr name="v5ListOrientation">
+        <enum name="vertical" value="1"/>
+        <enum name="horizontal" value="2"/>
+    </attr>
+    <!-- 列表排列方式 線性(linear)、網格(grid) -->
+    <attr name="v5ListLayoutType">
+        <enum name="linear"         value="1"/> <!-- 線性 -->
+        <enum name="grid"           value="2"/> <!-- 網格 -->
+    </attr>
+    <!-- 列表項目對齊方式 起始、置中、結尾 (非項目內容對齊) -->
+    <attr name="v5ListDividerGravity">
+        <enum name="start"          value="1"/>
+        <enum name="center"         value="2"/>
+        <enum name="end"            value="3"/>
+    </attr>
+    <!-- 列表單行最大數量 僅網格(grid)作用 -->
+    <attr name="v5ListSpanCount" format="integer"/>
+    <!-- ================================================ ListView(通用) END -->
+    <!-- ================================================ ListView(限制) START -->
+    <!-- 項目更新動畫啟用 -->
+    <attr name="v5ListAnimationEnable" format="boolean"/>
+    <!-- 開頭分隔線寬度 -->
+    <attr name="v5ListDividerStartSize" format="dimension"/>
+    <!-- 內容分隔線寬度 -->
+    <attr name="v5ListDividerMidSize" format="dimension"/>
+    <!-- 結尾分隔線寬度 -->
+    <attr name="v5ListDividerEndSize" format="dimension"/>
+    <!-- 分隔線顏色 -->
+    <attr name="v5ListDividerColor" format="color"/>
+    <!-- 無資料提示字 -->
+    <attr name="v5ListHint" format="string"/>
+    <!-- 無資料提示字顏色 -->
+    <attr name="v5ListHintColor" format="color"/>
+    <!-- 無資料提示字大小 -->
+    <attr name="v5ListHintSize" format="dimension"/>
+    <!-- ================================================ ListView(限制) END -->
+
+    <!-- ================================================ 其他(通用) START -->
+    <attr name="v5TabIndex" format="integer"/>
+    <attr name="v5TabLineBackgroundColor" format="color"/>
+    <attr name="v5TabLineColors" format="string"/>
+    <!-- ================================================ 其他(通用) END -->
+
+    <!-- ================================================ Calendar(限制) START -->
+    <attr name="v5TimeIs24Hour" format="boolean"/>
+    <attr name="v5TimeMinuteInterval" format="integer"/>
+    <!-- ================================================ Calendar(限制) END -->
+
+
+</resources>

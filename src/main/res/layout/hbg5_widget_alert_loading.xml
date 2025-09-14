@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#CCC"
+    tools:parentTag="android.widget.FrameLayout">
+
+    <priv.liten.hbg5_widget.bin.layout.HBG5FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <priv.liten.hbg5_widget.bin.layout.HBG5LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:orientation="vertical"
+            app:v5BackgroundColor="#D333"
+            app:v5BackgroundRadius="8dp">
+
+            <ProgressBar
+                style="?android:attr/progressBarStyle"
+                android:theme="@style/WhiteAccent"
+                android:id="@+id/progressBar_Spinner"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"/>
+
+            <priv.liten.hbg5_widget.bin.text.HBG5TextView
+                android:id="@+id/text_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:ellipsize="end"
+                android:maxLines="4"
+                tools:v5Text="車輛發動執行中，請稍候，請勿關閉手機螢幕或離開此頁面"
+                app:v5TextSize="@dimen/hbg5_text_size_normal"
+                app:v5TextColor="@color/hbg5_white"
+                app:v5TextAlignmentVertical="center"
+                app:v5TextAlignmentHorizontal="center"/>
+
+        </priv.liten.hbg5_widget.bin.layout.HBG5LinearLayout>
+
+    </priv.liten.hbg5_widget.bin.layout.HBG5FrameLayout>
+
+
+</merge>
